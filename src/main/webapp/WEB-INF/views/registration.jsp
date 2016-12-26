@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page session="false" contentType="text/html; charset=UTF-8" %>
 
 <html>
 <head>
@@ -13,7 +12,7 @@
 		Nazwisko: <input type="text" name="lastName" /><br /> 
 		Adres e-mail: <input type="text" name="email" /><br /> 
 		Nr telefonu: <input type="text" name="phone" /><br /> 
-		Data urodzenia: <input type="text" name="birthData" /><br />
+		Data urodzenia: <input type="text" name="birthDate" /><br />
 		Pesel: <input type="text" name="pesel" /><br />  
 		<input type="radio" name="gender" value="M" checked> Mezczynza
   		<input type="radio" name="gender" value="K"> Kobieta<br>
