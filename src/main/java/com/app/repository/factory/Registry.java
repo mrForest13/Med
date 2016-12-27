@@ -1,7 +1,7 @@
 package com.app.repository.factory;
 
 import com.app.dao.IVisitTypeFinder;
-import com.app.finder.VisitTypeFinder;
+import com.app.model.visit.finder.VisitTypeFinder;
 
 public class Registry {
 

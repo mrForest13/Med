@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.app.dao.IVisitTypeFinder;
-import com.app.model.VisitType;
+import com.app.model.visit.VisitType;
 import com.app.repository.factory.Registry;
 
 @Controller

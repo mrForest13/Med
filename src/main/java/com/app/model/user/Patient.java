@@ -1,11 +1,14 @@
-package com.app.model;
+package com.app.model.user;
+
+import java.util.Date;
 
 public class Patient extends User {
 
+	private Long patientId;
 	private String pesel;
 	private String email;
 	private String phone;
-	private String BirthDay;
+	private Date BirthDay;
 	private char gender;
 
 	public String getPesel() {
@@ -32,11 +35,11 @@ public class Patient extends User {
 		this.phone = phone;
 	}
 
-	public String getBirthDay() {
+	public Date getBirthDay() {
 		return BirthDay;
 	}
 
-	public void setBirthDay(String birthDay) {
+	public void setBirthDay(Date birthDay) {
 		BirthDay = birthDay;
 	}
 
@@ -48,4 +51,19 @@ public class Patient extends User {
 		this.gender = gender;
 	}
 
+	public Long getPatientId() {
+		return patientId;
+	}
+
+	public void setPatientId(Long patientId) {
+		this.patientId = patientId;
+	}
+
+	@Override
+	public String toString() {
+		return super.toString() +"\nPatient [patientId=" + patientId + ", pesel=" + pesel + ", email=" + email + ", phone=" + phone
+				+ ", BirthDay=" + BirthDay + ", gender=" + gender + "]";
+	}
+	
+	
 }

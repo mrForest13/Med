@@ -6,13 +6,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.app.model.User;
+import com.app.model.user.User;
+import com.app.model.user.finder.Finder;
+import com.app.model.user.finder.PatientFinder;
 
 @Controller()
 @RequestMapping("/user")
 public class UserController {
 
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
 	@RequestMapping(value = "/registration", method = RequestMethod.GET)
 	public String showrRegistrationUser() {
@@ -21,9 +23,11 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
-	public String registrationUser(User user) {
+	public String registrationUser() {
 
-		System.out.println(user);
+		PatientFinder finder = new PatientFinder();
+		
+		System.out.println(finder.find(3L).toString());
 		
 		return null;
 	}

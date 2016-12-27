@@ -2,7 +2,7 @@ package com.app.dao;
 
 import java.util.List;
 
-import com.app.model.VisitType;
+import com.app.model.visit.VisitType;
 
 public interface IVisitTypeFinder {
 

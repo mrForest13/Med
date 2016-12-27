@@ -1,4 +1,4 @@
-package com.app.finder;
+package com.app.model.visit.finder;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.app.dao.IVisitTypeFinder;
-import com.app.model.VisitType;
+import com.app.model.visit.VisitType;
 
 public class VisitTypeFinder implements IVisitTypeFinder {
 
