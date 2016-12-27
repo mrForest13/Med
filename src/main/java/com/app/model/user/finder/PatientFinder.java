@@ -33,7 +33,7 @@ public class PatientFinder extends AbstractUserFinder {
 					patient.setPesel(rs.getString(3));
 					patient.setEmail(rs.getString(4));
 					patient.setPhone(rs.getString(5));
-					patient.setBirthDay(rs.getDate(6));
+					patient.setbirthDate(rs.getDate(6));
 					patient.setGender(rs.getString(7).charAt(0));
 				} catch (SQLException e) {
 					e.printStackTrace();

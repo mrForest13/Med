@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
@@ -14,6 +15,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.app.transaction.TransactionScript;
+import com.app.transaction.user.AddPatientToTheSystem;
 
 /**
  * Handles requests for the application home page.
@@ -40,11 +44,32 @@ public class HomeController {
 		return "home";
 	}
 	
+	@RequestMapping(value = "/registration", method = RequestMethod.GET)
+	public String showrRegistrationUser() {
+
+		return "user/registration";
+	}
+
+	@RequestMapping(value = "/registration", method = RequestMethod.POST)
+	public String registrationUser(HttpServletRequest request) {
+		
+		TransactionScript transactionScript = new AddPatientToTheSystem(request);
+		
+		try {
+			transactionScript.run();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "redirect:/user/registration";
+		}
+		
+		return "redirect:/login";
+	}
+	
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String showLogin() {
 
-		return "login";
+		return "user/login";
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)

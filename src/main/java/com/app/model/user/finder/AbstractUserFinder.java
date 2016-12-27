@@ -19,6 +19,7 @@ public abstract class AbstractUserFinder extends Finder {
 			public void load(ResultSet rs) {
 				try {
 					user.setId(rs.getLong(1));
+					user.setUserType(rs.getInt(2));
 					user.setFirstName(rs.getString(3));
 					user.setLastName(rs.getString(4));
 					user.setLogin(rs.getString(5));

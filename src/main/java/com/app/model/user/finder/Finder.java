@@ -13,12 +13,11 @@ import com.app.med.HomeController;
 import com.app.model.user.User;
 
 public abstract class Finder {
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(Finder.class);
 
 	public User abstractFind(Long id, String tablename) {
-		boolean row = findRow(id, tablename, e -> {
-		});
+		boolean row = findRow(id, tablename, e -> {});
 
 		if (!row)
 			return null;
