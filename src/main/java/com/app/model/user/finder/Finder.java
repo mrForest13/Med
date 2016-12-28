@@ -25,6 +25,9 @@ public abstract class Finder {
 			User resultObject = getUserObject();
 			resultObject.setId(id);
 			load(resultObject);
+			
+			logger.info(resultObject.toString());
+			
 			return resultObject;
 		}
 	}
@@ -38,7 +41,7 @@ public abstract class Finder {
 		Connection con = null;
 		ResultSet rs = null;
 
-		String filter = tableNeame + "_UZ_ID = " + id;
+		String filter = tableNeame + "_ID = " + id;
 
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -63,8 +66,9 @@ public abstract class Finder {
 				e.printStackTrace();
 			}
 		}
-
+		
 		return true;
+		
 	}
 
 }

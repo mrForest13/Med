@@ -9,7 +9,7 @@ public abstract class AbstractUserFinder extends Finder {
 
 	public static String TABLENAME = "Uzytkownik";
 	
-	public abstract String getType();
+	public abstract int getType();
 	
 	protected void load(User user) {
 		

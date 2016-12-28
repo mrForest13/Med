@@ -3,12 +3,13 @@ package com.app.model.user.finder;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.app.model.user.Doctor;
 import com.app.model.user.Patient;
 import com.app.model.user.User;
 
-public class PatientFinder extends AbstractUserFinder {
+public class PatientFinder extends AbstractUserFinder implements UserFinder<Patient> {
 
-	private final static String type ="P";
+	private final static int type = 0;
 	public static String TABLENAME = "Uzytkownik_Pacjent";
 	
 	public Patient find(Long id) {
@@ -16,7 +17,7 @@ public class PatientFinder extends AbstractUserFinder {
 	}
 
 	@Override
-	public String getType() {
+	public int getType() {
 		return type;
 	}
 	

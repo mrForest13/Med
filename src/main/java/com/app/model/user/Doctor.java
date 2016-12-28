@@ -1,7 +1,8 @@
 package com.app.model.user;
 
-public class Doctor {
-
+public class Doctor extends User {
+	
+	private Long doctorId;
 	private String spec;
 	private String degree;
 
@@ -21,4 +22,20 @@ public class Doctor {
 		this.degree = degree;
 	}
 
+	public Long getDoctorId() {
+		return doctorId;
+	}
+
+	public void setDoctorId(Long doctorId) {
+		this.doctorId = doctorId;
+	}
+	
+	public Doctor() {}
+
+	@Override
+	public String toString() {
+		return super.toString() + "\nDoctor [doctorId=" + doctorId + ", spec=" + spec + ", degree=" + degree + "]";
+	}
+
+	
 }
