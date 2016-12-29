@@ -31,23 +31,15 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
+	public String home() {
 		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
-		
-		return "home";
+		return "redirect:/login";
 	}
 	
 	@RequestMapping(value = "/registration", method = RequestMethod.GET)
 	public String showrRegistrationUser() {
 
-		return "user/registration";
+		return "registration";
 	}
 
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
@@ -59,7 +51,7 @@ public class HomeController {
 			transactionScript.run();
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "redirect:/user/registration";
+			return "redirect:/registration";
 		}
 		
 		return "redirect:/login";
@@ -69,7 +61,7 @@ public class HomeController {
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String showLogin() {
 
-		return "user/login";
+		return "login";
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -78,12 +70,6 @@ public class HomeController {
 		response.addCookie(new Cookie("SessionID", "123"));
 		
 		return "userpage";
-	}
-	
-	@RequestMapping(value = "/result", method = RequestMethod.GET)
-	public String result() {
-		
-		return "result";
 	}
 
 	

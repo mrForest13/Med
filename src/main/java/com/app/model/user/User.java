@@ -89,7 +89,7 @@ public abstract class User {
 		try {
 			con = ConnectionOracle.getInstance();
 
-			insertStatement = con.prepareStatement(insertStatementString, new String[] { "UZYTKOWNIK_UZ_ID" });
+			insertStatement = con.prepareStatement(insertStatementString, new String[] { "UZYTKOWNIK_ID" });
 			insertStatement.setInt(1, getUserType());
 			insertStatement.setString(2, getFirstName());
 			insertStatement.setString(3, getLastName());
