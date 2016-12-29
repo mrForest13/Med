@@ -1,6 +1,6 @@
 package com.app.model.visit;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 import com.app.model.user.User;
 import com.app.transaction.Money;
@@ -11,7 +11,8 @@ public class Visit {
 	private User patient;
 	private User doctor;
 	private VisitType visitType;
-	private Date visitDate;
+	private Timestamp visitDateFrom;
+	private Timestamp visitDateTo;
 	private Money visitPrice;
 	private boolean visistConfirmed;
 
@@ -47,12 +48,12 @@ public class Visit {
 		this.visitType = visitType;
 	}
 
-	public Date getVisitDate() {
-		return visitDate;
+	public Timestamp getVisitDateFrom() {
+		return visitDateFrom;
 	}
 
-	public void setVisitDate(Date visitDate) {
-		this.visitDate = visitDate;
+	public void setVisitDate(Timestamp visitDateFrom) {
+		this.visitDateFrom = visitDateFrom;
 	}
 
 	public Money getVisitPrice() {
@@ -71,14 +72,15 @@ public class Visit {
 		this.visistConfirmed = visistConfirmed;
 	}
 
-	public Visit(Long id, User patient, User doctor, VisitType visitType, Date visitDate, Money visitPrice,
-			boolean visistConfirmed) {
+	public Visit(Long id, User patient, User doctor, VisitType visitType, Timestamp visitDateFrom, Timestamp visitDateTo,
+			Money visitPrice, boolean visistConfirmed) {
 		super();
 		this.id = id;
 		this.patient = patient;
 		this.doctor = doctor;
 		this.visitType = visitType;
-		this.visitDate = visitDate;
+		this.visitDateFrom = visitDateFrom;
+		this.visitDateTo = visitDateTo;
 		this.visitPrice = visitPrice;
 		this.visistConfirmed = visistConfirmed;
 	}
@@ -86,8 +88,16 @@ public class Visit {
 	@Override
 	public String toString() {
 		return "Visit [id=" + id + ", patient=" + patient + ", doctor=" + doctor + ", visitType=" + visitType
-				+ ", visitDate=" + visitDate + ", visitPrice=" + visitPrice + ", visistConfirmed=" + visistConfirmed
-				+ "]";
+				+ ", visitDateFrom=" + visitDateFrom + ", visitDateTo=" + visitDateTo + ", visitPrice=" + visitPrice
+				+ ", visistConfirmed=" + visistConfirmed + "]";
+	}
+
+	public Timestamp getVisitDateTo() {
+		return visitDateTo;
+	}
+
+	public void setVisitDateTo(Timestamp visitDateTo) {
+		this.visitDateTo = visitDateTo;
 	}
 
 }

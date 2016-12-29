@@ -43,7 +43,7 @@ public class AddPatientToTheSystem implements TransactionScript {
 				birthDay, gender);
 		
 
-		System.out.println(patient);
+		logger.info(patient.toString());
 		
 		patient.insert();
 

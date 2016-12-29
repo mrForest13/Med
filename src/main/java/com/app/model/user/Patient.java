@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import com.app.db.ConnectionOracle;
+
 
 public class Patient extends User {
 
@@ -86,10 +88,10 @@ public class Patient extends User {
 		
 		PreparedStatement insertStatement = null;
 		Connection con = null;
+		ResultSet rs = null;
 		
 		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "root", "root");
+			con = ConnectionOracle.getInstance();
 			
 			insertStatement = con.prepareStatement(insertStatementString, new String[] { "UZYTKOWNIK_PACJENT_ID" });
 			insertStatement.setInt(1, getId().intValue());
@@ -100,7 +102,7 @@ public class Patient extends User {
 			insertStatement.setString(6, ""+getGender());
 			insertStatement.executeUpdate();
 			
-			ResultSet rs = insertStatement.getGeneratedKeys();
+			rs = insertStatement.getGeneratedKeys();
 			
 			if (rs.next())
 				setPatientId(rs.getLong(1));
@@ -109,7 +111,8 @@ public class Patient extends User {
 			e.printStackTrace();
 		} finally {
 			try {
-				con.close();
+				insertStatement.close();
+				rs.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

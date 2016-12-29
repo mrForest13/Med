@@ -2,16 +2,19 @@ package com.app.model.visit.finder;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.app.dao.IFinder;
+import com.app.db.ConnectionOracle;
 import com.app.model.user.Doctor;
 import com.app.model.user.Patient;
 import com.app.model.visit.Visit;
@@ -23,19 +26,22 @@ public class VisitFinder implements IFinder<Visit> {
 
 	private static final Logger logger = LoggerFactory.getLogger(VisitFinder.class);
 
-	private final String getAll = "Select * from VISIT";
+	private static final String getAll = "Select * from VISIT where VISIT_DATE_FROM > ?";
 	
 	@Override
 	public List<Visit> getAll() {
 		
 		Connection con = null;
+		PreparedStatement getStatement = null;
 		List<Visit> result = new ArrayList<Visit>();
+		ResultSet rs = null;
 
 		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "root", "root");
-			Statement st = con.createStatement();
-			ResultSet rs = st.executeQuery(getAll);
+			con = ConnectionOracle.getInstance();
+			getStatement = con.prepareStatement(getAll);
+			getStatement.setTimestamp(1, new Timestamp(Calendar.getInstance().getTime().getTime()));
+			logger.info("Select * from VISIT where VISIT_DATE_FROM > " + new Timestamp(Calendar.getInstance().getTime().getTime()));
+			rs = getStatement.executeQuery();
 
 			while (rs.next())
 				result.add(load(rs));
@@ -44,7 +50,8 @@ public class VisitFinder implements IFinder<Visit> {
 			e.printStackTrace();
 		} finally {
 			try {
-				con.close();
+				getStatement.close();
+				rs.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -66,7 +73,7 @@ public class VisitFinder implements IFinder<Visit> {
 		
 		boolean visistConfirmed = rs.getString(8).equals("N") ? false : true;
 		
-		Visit visit = new Visit(id, patient, doctor, visitType, rs.getDate(5), new Money(), visistConfirmed);
+		Visit visit = new Visit(id, patient, doctor, visitType, rs.getTimestamp(5),rs.getTimestamp(6), new Money(), visistConfirmed);
 		
 		logger.info(visit.toString());
 		

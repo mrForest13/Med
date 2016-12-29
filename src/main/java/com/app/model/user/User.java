@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.app.db.ConnectionOracle;
+
 public abstract class User {
 
 	private static final String insertStatementString = "INSERT INTO uzytkownik values (UZYTKOWNIK_SEQ.nextval,?,?,?,?,?)";
@@ -82,10 +84,10 @@ public abstract class User {
 
 		PreparedStatement insertStatement = null;
 		Connection con = null;
+		ResultSet rs = null;
 
 		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "root", "root");
+			con = ConnectionOracle.getInstance();
 
 			insertStatement = con.prepareStatement(insertStatementString, new String[] { "UZYTKOWNIK_UZ_ID" });
 			insertStatement.setInt(1, getUserType());
@@ -95,7 +97,7 @@ public abstract class User {
 			insertStatement.setString(5, getPassword());
 			insertStatement.executeUpdate();
 
-			ResultSet rs = insertStatement.getGeneratedKeys();
+			rs = insertStatement.getGeneratedKeys();
 
 			if (rs.next())
 				setId(rs.getLong(1));
@@ -104,7 +106,8 @@ public abstract class User {
 			e.printStackTrace();
 		} finally {
 			try {
-				con.close();
+				insertStatement.close();
+				rs.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

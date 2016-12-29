@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.app.dao.IFinder;
+import com.app.db.ConnectionOracle;
 import com.app.model.user.finder.Finder;
 import com.app.model.visit.VisitType;
 
@@ -28,12 +29,13 @@ public class VisitTypeFinder implements IFinder<VisitType> {
 
 		Connection con = null;
 		List<VisitType> result = new ArrayList<VisitType>();
+		Statement st = null;
+		ResultSet rs = null;
 
 		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "root", "root");
-			Statement st = con.createStatement();
-			ResultSet rs = st.executeQuery(getAll);
+			con = ConnectionOracle.getInstance();;
+			st = con.createStatement();
+			rs = st.executeQuery(getAll);
 
 			while (rs.next())
 				result.add(new VisitType(rs.getLong(1), rs.getString(2)));
@@ -42,7 +44,8 @@ public class VisitTypeFinder implements IFinder<VisitType> {
 			e.printStackTrace();
 		} finally {
 			try {
-				con.close();
+				st.close();
+				rs.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

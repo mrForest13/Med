@@ -9,6 +9,7 @@ import java.sql.Statement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.app.db.ConnectionOracle;
 import com.app.med.HomeController;
 import com.app.model.user.User;
 
@@ -40,13 +41,14 @@ public abstract class Finder {
 
 		Connection con = null;
 		ResultSet rs = null;
+		Statement st = null;
 
 		String filter = tableNeame + "_ID = " + id;
 
 		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "root", "root");
-			Statement st = con.createStatement();
+			con = ConnectionOracle.getInstance();
+			
+			st = con.createStatement();
 
 			logger.info("Select * from " + tableNeame + " WHERE " + filter);
 
@@ -61,7 +63,8 @@ public abstract class Finder {
 			e.printStackTrace();
 		} finally {
 			try {
-				con.close();
+				st.close();
+				rs.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
