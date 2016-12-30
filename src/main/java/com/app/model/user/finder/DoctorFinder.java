@@ -9,25 +9,20 @@ import org.slf4j.LoggerFactory;
 import com.app.model.user.Doctor;
 import com.app.model.user.User;
 
-public class DoctorFinder extends AbstractUserFinder implements UserFinder<Doctor> {
+public class DoctorFinder extends UserFinder implements IUserFinder<Doctor> {
 
 	private static final Logger logger = LoggerFactory.getLogger(DoctorFinder.class);
 	
-	private final static int type = 1;
-	public static String TABLENAME = "Uzytkownik_doktor";
+	public final static int TYPE = 1;
+	public static final String TABLENAME = "Uzytkownik_doktor";
 	
 	public Doctor find(Long id) {
 		return (Doctor) abstractFind(id, TABLENAME);
 	}
 	
-	
-	@Override
-	public int getType() {
-		return type;
-	}
-	
 	public void load(User user) {
-
+		super.load(user);
+		
 		Doctor doctor = (Doctor) user;
 		
 		Load e = new Load() {
@@ -35,7 +30,6 @@ public class DoctorFinder extends AbstractUserFinder implements UserFinder<Docto
 			@Override
 			public void load(ResultSet rs) {
 				try {
-					doctor.setId(rs.getLong(2));
 					doctor.setDoctorId(rs.getLong(1));
 					doctor.setSpec(rs.getString(3));
 					doctor.setDegree(rs.getString(4));
@@ -46,9 +40,7 @@ public class DoctorFinder extends AbstractUserFinder implements UserFinder<Docto
 		};
 		
 		findRow(user.getId(), TABLENAME, e);
-		
-		super.load(user);
-	
+
 	}
 
 	@Override

@@ -1,10 +1,7 @@
 package com.app.med;
 
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.Locale;
+import java.util.List;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,9 +11,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import com.app.dao.IFinder;
+import com.app.model.visit.Visit;
+import com.app.model.visit.VisitType;
+import com.app.registry.Registry;
 import com.app.transaction.TransactionScript;
+import com.app.transaction.session.CheckUserPermissionAndCreateSession;
 import com.app.transaction.user.AddPatientToTheSystem;
 
 /**
@@ -24,18 +25,18 @@ import com.app.transaction.user.AddPatientToTheSystem;
  */
 @Controller
 public class HomeController {
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
+
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home() {
-		
+
 		return "redirect:/login";
 	}
-	
+
 	@RequestMapping(value = "/registration", method = RequestMethod.GET)
 	public String showrRegistrationUser() {
 
@@ -43,34 +44,57 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
-	public String registrationUser(HttpServletRequest request) {
-		
-		TransactionScript transactionScript = new AddPatientToTheSystem(request);
-		
+	public String registrationUser(HttpServletRequest request, HttpServletResponse response) {
+
+		TransactionScript transactionScript = new AddPatientToTheSystem(request, response);
+
 		try {
 			transactionScript.run();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "redirect:/registration";
 		}
-		
+
 		return "redirect:/login";
 	}
-	
-	
+
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String showLogin() {
 
 		return "login";
 	}
-	
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String registrationUser(@RequestParam("login") String username, @RequestParam("password") String password, HttpServletResponse response) {
 
-		response.addCookie(new Cookie("SessionID", "123"));
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public String showLogin(HttpServletRequest request, HttpServletResponse response) {
+
+		TransactionScript transactionScript = new CheckUserPermissionAndCreateSession(request, response);
+
+		try {
+			transactionScript.run();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "redirect:/login";
+		}
+
+		return "redirect:/result";
+	}
+	
+	@RequestMapping(value = "/noacces", method = RequestMethod.GET)
+	public String noAcces(HttpServletRequest request, HttpServletResponse response) {
 		
-		return "userpage";
+		return "noacces";
+	}
+	
+	@RequestMapping(value = "/alreadylogged", method = RequestMethod.GET)
+	public String alreadyLogged(HttpServletRequest request, HttpServletResponse response) {
+		
+		return "alreadylogged";
+	}
+	
+	@RequestMapping(value = "/result", method = RequestMethod.GET)
+	public String getresult(HttpServletRequest request, HttpServletResponse response) {
+		
+		return "result";
 	}
 
-	
 }

@@ -1,7 +1,6 @@
 package com.app.model.user.finder;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -10,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.app.db.ConnectionOracle;
-import com.app.med.HomeController;
 import com.app.model.user.User;
 
 public abstract class Finder {
@@ -43,7 +41,7 @@ public abstract class Finder {
 		ResultSet rs = null;
 		Statement st = null;
 
-		String filter = tableNeame + "_ID = " + id;
+		String filter = tableNeame + "_UZ_ID = " + id;
 
 		try {
 			con = ConnectionOracle.getInstance();

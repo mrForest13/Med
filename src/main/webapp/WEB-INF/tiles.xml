@@ -7,19 +7,19 @@
 	<definition name="base.definition"
 		template="/WEB-INF/views/template/layout.jsp">
 		<put-attribute name="title" value="" />
-		<put-attribute name="menu" value="/WEB-INF/views/template/menu.jsp" />
+		<put-attribute name="usermenu" value="/WEB-INF/views/template/usermenu.jsp" />
 		<put-attribute name="body" value="" />
 		<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp" />
 	</definition>
 
 	<definition name="registration" extends="base.definition">
-		<put-attribute name="menu" value="" />
+		<put-attribute name="usermenu" value="" />
 		<put-attribute name="title" value="Rejestracja" />
 		<put-attribute name="body" value="/WEB-INF/views/user/registration.jsp" />
 	</definition>
 	
 	<definition name="login" extends="base.definition">
-		<put-attribute name="menu" value="" />
+		<put-attribute name="usermenu" value="" />
 		<put-attribute name="title" value="Logowanie" />
 		<put-attribute name="body" value="/WEB-INF/views/user/login.jsp" />
 	</definition>
@@ -27,6 +27,21 @@
 	<definition name="freevisit" extends="base.definition">
 		<put-attribute name="title" value="Wizyty" />
 		<put-attribute name="body" value="/WEB-INF/views/visit/freevisit.jsp" />
+	</definition>
+
+	<definition name="result" extends="base.definition">
+		<put-attribute name="title" value="Wizyty" />
+		<put-attribute name="body" value="/WEB-INF/views/result.jsp" />
+	</definition>
+	
+	<definition name="alreadylogged" extends="base.definition">
+		<put-attribute name="title" value="Zalogowany" />
+		<put-attribute name="body" value="/WEB-INF/views/alreadylogged.jsp" />
+	</definition>
+	
+	<definition name="noacces" extends="base.definition">
+		<put-attribute name="title" value="Zalogowany" />
+		<put-attribute name="body" value="/WEB-INF/views/noacces.jsp" />
 	</definition>
 
 </tiles-definitions>

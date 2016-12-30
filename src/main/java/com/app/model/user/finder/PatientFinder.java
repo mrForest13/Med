@@ -7,18 +7,13 @@ import com.app.model.user.Doctor;
 import com.app.model.user.Patient;
 import com.app.model.user.User;
 
-public class PatientFinder extends AbstractUserFinder implements UserFinder<Patient> {
+public class PatientFinder extends UserFinder implements IUserFinder<Patient> {
 
-	private final static int type = 0;
-	public static String TABLENAME = "Uzytkownik_Pacjent";
+	public final static int TYPE = 0;
+	public static final String TABLENAME = "Uzytkownik_Pacjent";
 	
 	public Patient find(Long id) {
 		return (Patient) abstractFind(id, TABLENAME);
-	}
-
-	@Override
-	public int getType() {
-		return type;
 	}
 	
 	public void load(User user) {

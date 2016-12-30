@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 import com.app.db.ConnectionOracle;
 
-public abstract class User {
+public class User {
 
 	private static final String insertStatementString = "INSERT INTO uzytkownik values (UZYTKOWNIK_SEQ.nextval,?,?,?,?,?)";
 	
@@ -89,7 +89,7 @@ public abstract class User {
 		try {
 			con = ConnectionOracle.getInstance();
 
-			insertStatement = con.prepareStatement(insertStatementString, new String[] { "UZYTKOWNIK_ID" });
+			insertStatement = con.prepareStatement(insertStatementString, new String[] { "UZYTKOWNIK_UZ_ID" });
 			insertStatement.setInt(1, getUserType());
 			insertStatement.setString(2, getFirstName());
 			insertStatement.setString(3, getLastName());
@@ -116,8 +116,10 @@ public abstract class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", login=" + login
-				+ ", password=" + password + "]";
+		return "User [id=" + id + ", userType=" + userType + ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", login=" + login + ", password=" + password + "]";
 	}
+
+
 
 }
