@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.app.dao.IFinder;
+import com.app.model.session.Session;
 import com.app.model.visit.Visit;
 import com.app.model.visit.VisitType;
 import com.app.registry.Registry;
@@ -89,6 +90,23 @@ public class HomeController {
 	public String alreadyLogged(HttpServletRequest request, HttpServletResponse response) {
 		
 		return "alreadylogged";
+	}
+	
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logOut(HttpServletRequest request, HttpServletResponse response) {
+		
+		Long userId = (Long) request.getAttribute("userId");
+		
+		Session session = null;
+		
+		if(userId!= null) session = Registry.sessionFinder().findById(userId);
+		
+		if(session!=null) {
+			session.setSessionIsActive(false);
+			session.update();
+		}
+		
+		return "redirect:/login";
 	}
 	
 	@RequestMapping(value = "/result", method = RequestMethod.GET)

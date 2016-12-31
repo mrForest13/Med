@@ -7,15 +7,16 @@
 <nav class="navbar navbar-default">
 	<div class="container-fluid">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="#">Przychodnia</a>
+			<a class="navbar-brand" href="">Przychodnia</a>
 		</div>
 		<ul class="nav navbar-nav">
-			<li><a href="${contextPath}/visit">Umow wizyte</a></li>
+			<li><a href="${contextPath}/user/visit">Umow wizyte</a></li>
 			<li><a href="#">Moje wizyty</a></li>
 			<li><a href="#">Wyniki badan</a></li>
 			<li><a href="#">Skierowania</a></li>
 			<li><a href="#">Recepty</a></li>
-			<li><a href="#">Moje dane</a></li>
+			<li><a href="${contextPath}/user/mypage">Moje dane</a></li>
+			<li><a href="${contextPath}/logout">Wyloguj</a></li>
 		</ul>
 	</div>
 </nav>

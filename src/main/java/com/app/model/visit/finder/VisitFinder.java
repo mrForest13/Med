@@ -14,19 +14,22 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.app.dao.IFinder;
+import com.app.dao.IQueryFinder;
 import com.app.db.ConnectionOracle;
 import com.app.model.user.Doctor;
 import com.app.model.user.Patient;
 import com.app.model.visit.Visit;
 import com.app.model.visit.VisitType;
+import com.app.query.QueryObject;
 import com.app.registry.Registry;
 import com.app.transaction.Money;
 
-public class VisitFinder implements IFinder<Visit> {
+public class VisitFinder implements IQueryFinder<Visit> {
 
 	private static final Logger logger = LoggerFactory.getLogger(VisitFinder.class);
 
-	private static final String getAll = "Select * from VISIT where VISIT_DATE_FROM > ?";
+	private static final String getAll = "Select * from VISIT";
+	private static final String getByQuery = "Select * from VISIT where ";
 	
 	@Override
 	public List<Visit> getAll() {
@@ -39,8 +42,7 @@ public class VisitFinder implements IFinder<Visit> {
 		try {
 			con = ConnectionOracle.getInstance();
 			getStatement = con.prepareStatement(getAll);
-			getStatement.setTimestamp(1, new Timestamp(Calendar.getInstance().getTime().getTime()));
-			logger.info("Select * from VISIT where VISIT_DATE_FROM > " + new Timestamp(Calendar.getInstance().getTime().getTime()));
+			logger.info("Select * from VISIT");
 			rs = getStatement.executeQuery();
 
 			while (rs.next())
@@ -86,6 +88,39 @@ public class VisitFinder implements IFinder<Visit> {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public List<Visit> findByQueryObject(QueryObject query) {
+		
+		Connection con = null;
+		PreparedStatement getStatement = null;
+		List<Visit> result = new ArrayList<Visit>();
+		ResultSet rs = null;
+
+		try {
+			con = ConnectionOracle.getInstance();
+			getStatement = con.prepareStatement(getByQuery + query.generateWhereClause());
+			logger.info(getByQuery + query.generateWhereClause());
+			rs = getStatement.executeQuery();
+
+			while (rs.next())
+				result.add(load(rs));
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				getStatement.close();
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return result;
+	}
+
+	
 
 
 

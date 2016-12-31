@@ -51,8 +51,13 @@ public class LoginFilter extends SessionFilter implements Filter {
 
 		Session session = Registry.sessionFinder().findById(userId);
 
-		if (session != null)
+		if (session != null && session.isSessionIsActive()) {
 			request.setAttribute("type", session.getUser().getUserType());
+			httpServletRequest.setAttribute("userId", userId);
+		} else {
+			request.setAttribute("type", -1);
+			httpServletRequest.setAttribute("userId", userId);
+		}
 
 		chain.doFilter(request, response);
 	}

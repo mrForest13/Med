@@ -61,6 +61,8 @@ public class UserSessionFilter extends SessionFilter implements Filter {
 
 			session.setSessionDate(startSession);
 			session.update();
+			
+			httpServletRequest.setAttribute("userId", userId);
 
 			chain.doFilter(request, response);
 		} else {

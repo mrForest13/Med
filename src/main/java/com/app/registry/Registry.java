@@ -1,15 +1,15 @@
 package com.app.registry;
 
 import com.app.dao.IFinder;
+import com.app.dao.IQueryFinder;
 import com.app.model.session.Session;
 import com.app.model.session.finder.SessionFinder;
 import com.app.model.user.Doctor;
 import com.app.model.user.Patient;
 import com.app.model.user.finder.DoctorFinder;
-import com.app.model.user.finder.Finder;
+import com.app.model.user.finder.IUserFinder;
 import com.app.model.user.finder.PatientFinder;
 import com.app.model.user.finder.UserFinder;
-import com.app.model.user.finder.IUserFinder;
 import com.app.model.visit.Visit;
 import com.app.model.visit.VisitType;
 import com.app.model.visit.finder.VisitFinder;
@@ -20,7 +20,7 @@ public class Registry {
 	private static Registry soleInstance = new Registry();
 	
 	private IFinder<VisitType> visitTypeFinder = new VisitTypeFinder();
-	private IFinder<Visit> visitFinder = new VisitFinder();
+	private IQueryFinder<Visit> visitFinder = new VisitFinder();
 	private IUserFinder<Patient> patientFinder = new PatientFinder();
 	private IUserFinder<Doctor> doctorFinder = new DoctorFinder();
 	private UserFinder userFinder = new UserFinder();
@@ -36,7 +36,7 @@ public class Registry {
 		return getInstance().visitTypeFinder;
 	}
 	
-	public static IFinder<Visit> visitFinder() {
+	public static IQueryFinder<Visit> visitFinder() {
 		return getInstance().visitFinder;
 	}
 	

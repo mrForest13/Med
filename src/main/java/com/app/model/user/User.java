@@ -11,6 +11,7 @@ import com.app.db.ConnectionOracle;
 public class User {
 
 	private static final String insertStatementString = "INSERT INTO uzytkownik values (UZYTKOWNIK_SEQ.nextval,?,?,?,?,?)";
+	private static final String updateStatementString = "UPDATE uzytkownik Set uzytkownik_login = ?, uzytkownik_user_password = ? where uzytkownik_uz_id = ?";
 	
 	private Long id;
 	private int userType;
@@ -108,6 +109,35 @@ public class User {
 			try {
 				insertStatement.close();
 				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public void update() {
+		
+		PreparedStatement insertStatement = null;
+		Connection con = null;
+
+		try
+		{
+			con = ConnectionOracle.getInstance();
+
+			insertStatement = con.prepareStatement(updateStatementString);
+			insertStatement.setString(1, getLogin());
+			insertStatement.setString(2, getPassword());
+			insertStatement.setLong(3, getId());
+			insertStatement.executeUpdate();
+
+		}catch(
+		Exception e)
+		{
+			e.printStackTrace();
+		}finally
+		{
+			try {
+				insertStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
