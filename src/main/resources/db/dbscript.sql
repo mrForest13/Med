@@ -68,9 +68,9 @@ visit_type VARCHAR(100)
 
 CREATE TABLE visit(
 visit_id NUMBER NOT NULL, PRIMARY KEY(visit_id),
-visit_uzytkownik_doktor_id NUMBER NOT NULL, FOREIGN KEY (visit_uzytkownik_doktor_id) REFERENCES uzytkownik_doktor(uzytkownik_doktor_id),
+visit_uzytkownik_doktor_id NUMBER NOT NULL, FOREIGN KEY (visit_uzytkownik_doktor_id) REFERENCES uzytkownik(uzytkownik_uz_id),
 visit_visit_types_id NUMBER NOT NULL, FOREIGN KEY (visit_visit_types_id) REFERENCES visit_types(visit_type_id),
-visit_user_id NUMBER, FOREIGN KEY (visit_user_id) REFERENCES uzytkownik(uzytkownik_uz_id),
+visit_user_pacjent_id NUMBER, FOREIGN KEY (visit_user_pacjent_id) REFERENCES uzytkownik(uzytkownik_uz_id),
 visit_date_from DATE,
 visit_date_to DATE,
 visit_price NUMBER,
@@ -97,10 +97,13 @@ sample_description VARCHAR(500));
 CREATE TABLE uzytkownik_session(
 session_id NUMBER NOT NULL, PRIMARY KEY(session_id),
 session_uzytkownik_uz_id NUMBER NOT NULL, FOREIGN KEY (session_uzytkownik_uz_id) REFERENCES uzytkownik(uzytkownik_uz_id),
-session_hash VARCHAR(20) NOT NULL,
+session_hash VARCHAR(200) NOT NULL,
 session_date DATE,
 session_is_active CHAR(1)
 );
+
+CREATE SEQUENCE SESSION_SEQ
+   START WITH 1;
 
 /*
 drop table uzytkownik_session;
@@ -118,4 +121,5 @@ drop table uzytkownik;
 
 DROP SEQUENCE UZYTKOWNIK_SEQ;
 DROP SEQUENCE UZYTKOWNIK_P_SEQ;
+DROP SEQUENCE SESSION_SEQ;
 */
