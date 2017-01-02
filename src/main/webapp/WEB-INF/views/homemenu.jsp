@@ -10,13 +10,8 @@
 			<a class="navbar-brand" href="">Przychodnia</a>
 		</div>
 		<ul class="nav navbar-nav">
-			<li><a href="${contextPath}/user/visit">Umow wizyte</a></li>
-			<li><a href="${contextPath}/user/myvisit">Moje wizyty</a></li>
-			<li><a href="#">Wyniki badan</a></li>
-			<li><a href="#">Skierowania</a></li>
-			<li><a href="${contextPath}/user/prescriptions">Recepty</a></li>
-			<li><a href="${contextPath}/user/mypage">Moje dane</a></li>
-			<li><a href="${contextPath}/logout">Wyloguj</a></li>
+			<li><a href="${contextPath}/login">Logowanie</a></li>
+			<li><a href="${contextPath}/registration">Rejestracja</a></li>
 		</ul>
 	</div>
 </nav>

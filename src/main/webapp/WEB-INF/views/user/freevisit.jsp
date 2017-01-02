@@ -6,6 +6,7 @@
 <div class="container">
 
 	<table class="table table-striped">
+		<caption>Wolne terminy</caption>
 		<tr>
 			<th>Data wizyty</th>
 			<th>Lekarz</th>
@@ -19,7 +20,7 @@
 				<td>${visit.getDoctor().firstName}
 					${visit.getDoctor().lastName}</td>
 				<td>${visit.getVisitType().visitType}</td>
-				<td><a class="btn btn-primary" href="toDo">rezerwuj</a></td>
+				<td><a class="btn btn-primary" href="${contextPath}/med-1/user/book/${visit.getId()}">rezerwuj</a></td>
 			</tr>
 		</c:forEach>
 	</table>

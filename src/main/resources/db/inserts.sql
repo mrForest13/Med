@@ -88,26 +88,41 @@ select * from dual;
 
 --recepta
 insert all into recepta values
-(1,1,1,'2016-05-13','Y')
+(1,1,10,'2016-05-13','Y')
 into recepta values
-(2,1,1,'2016-06-14','Y')
+(2,1,8,'2016-06-14','Y')
 into recepta values
-(3,2,2,'2016-09-30','N')
+(3,2,7,'2016-09-30','N')
 select * from dual;
 
 --lek
 insert all into lek values
-(1,1,'Dermolox Forte',60)
+(1,'Dermolox Forte',60)
 into lek values
-(2,1,'Visitan',0)
+(2,'Visitan',0)
 into lek values
-(3,1,'Urolox',90)
+(3,'Urolox',90)
 into lek values
-(4,2,'Dentax',70)
+(4,'Dentax',70)
 into lek values
-(5,2,'Mafonax',10)
+(5,'Mafonax',10)
 into lek values
-(6,3,'Timax',20)
+(6,'Timax',20)
+select * from dual;
+
+--recepta_lek
+insert all into recepta_lek values
+(1,1,1)
+into recepta_lek values
+(2,2,1)
+into recepta_lek values
+(3,3,3)
+into recepta_lek values
+(4,6,3)
+into recepta_lek values
+(5,5,2)
+into recepta_lek values
+(6,1,2)
 select * from dual;
 
 --typy wizyt
@@ -149,7 +164,9 @@ into visit values
 into visit values
 (10,8,2,'',TO_DATE('2017-01-02 16:30','YYYY-MM-DD HH24:MI'),TO_DATE('2017-01-02 17:00','YYYY-MM-DD HH24:MI'),100,'N')
 into visit values
-(11,7,3,'',TO_DATE('2017-01-02 16:30','YYYY-MM-DD HH24:MI'),TO_DATE('2017-01-02 17:00','YYYY-MM-DD HH24:MI'),100,'N')
+(11,7,3,1,TO_DATE('2016-01-02 15:30','YYYY-MM-DD HH24:MI'),TO_DATE('2016-01-02 16:30','YYYY-MM-DD HH24:MI'),0,'Y')
+into visit values
+(12,7,3,'',TO_DATE('2017-01-02 16:30','YYYY-MM-DD HH24:MI'),TO_DATE('2017-01-02 17:00','YYYY-MM-DD HH24:MI'),100,'N')
 select * from dual;
 
 --badania lab

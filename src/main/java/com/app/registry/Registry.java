@@ -2,6 +2,8 @@ package com.app.registry;
 
 import com.app.dao.IFinder;
 import com.app.dao.IQueryFinder;
+import com.app.model.medical.MedicalPrescription;
+import com.app.model.medical.finder.MedicalPrescriptionFinder;
 import com.app.model.session.Session;
 import com.app.model.session.finder.SessionFinder;
 import com.app.model.user.Doctor;
@@ -24,7 +26,8 @@ public class Registry {
 	private IUserFinder<Patient> patientFinder = new PatientFinder();
 	private IUserFinder<Doctor> doctorFinder = new DoctorFinder();
 	private UserFinder userFinder = new UserFinder();
-	private IFinder<Session> sessionFinder = new SessionFinder();
+	private SessionFinder sessionFinder = new SessionFinder();
+	private MedicalPrescriptionFinder medicalPrescriptionFinder = new MedicalPrescriptionFinder();
 
 	private Registry() {}
 	
@@ -52,7 +55,11 @@ public class Registry {
 		return getInstance().userFinder;
 	}
 	
-	public static IFinder<Session> sessionFinder() {
+	public static SessionFinder sessionFinder() {
 		return getInstance().sessionFinder;
+	}
+	
+	public static MedicalPrescriptionFinder medicalPrescriptionFinder() {
+		return getInstance().medicalPrescriptionFinder;
 	}
 }

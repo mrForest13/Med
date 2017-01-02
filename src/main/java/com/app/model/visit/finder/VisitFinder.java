@@ -28,12 +28,12 @@ public class VisitFinder implements IQueryFinder<Visit> {
 
 	private static final Logger logger = LoggerFactory.getLogger(VisitFinder.class);
 
+	private static final String findById = "Select * from VISIT where visit_id = ?";
 	private static final String getAll = "Select * from VISIT";
-	private static final String getByQuery = "Select * from VISIT where ";
-	
-	@Override
+	public static final String TABLE = "Visit";
+
 	public List<Visit> getAll() {
-		
+
 		Connection con = null;
 		PreparedStatement getStatement = null;
 		List<Visit> result = new ArrayList<Visit>();
@@ -42,7 +42,7 @@ public class VisitFinder implements IQueryFinder<Visit> {
 		try {
 			con = ConnectionOracle.getInstance();
 			getStatement = con.prepareStatement(getAll);
-			logger.info("Select * from VISIT");
+			logger.info(getAll);
 			rs = getStatement.executeQuery();
 
 			while (rs.next())
@@ -58,40 +58,68 @@ public class VisitFinder implements IQueryFinder<Visit> {
 				e.printStackTrace();
 			}
 		}
-		
+
 		return result;
 	}
-	
+
 	private Visit load(ResultSet rs) throws SQLException {
-		
+
 		Long id = rs.getLong(1);
 		Long userId = rs.getLong(4);
-		
+
 		Doctor doctor = Registry.doctorFinder().find(rs.getLong(2));
-		
-		Patient patient = userId!=null ? Registry.patientFinder().find(userId) : null;
-		
+
+		Patient patient = userId != null ? Registry.patientFinder().find(userId) : null;
+
 		VisitType visitType = Registry.visitTypeFinder().findById(rs.getLong(3));
-		
+
 		boolean visistConfirmed = rs.getString(8).equals("N") ? false : true;
-		
-		Visit visit = new Visit(id, patient, doctor, visitType, rs.getTimestamp(5),rs.getTimestamp(6), new Money(), visistConfirmed);
-		
+
+		Visit visit = new Visit(id, patient, doctor, visitType, rs.getTimestamp(5), rs.getTimestamp(6), new Money(),
+				visistConfirmed);
+
 		logger.info(visit.toString());
-		
+
 		return visit;
-		
+
 	}
 
 	@Override
 	public Visit findById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+
+		Connection con = null;
+		PreparedStatement getStatement = null;
+		Visit result = null;
+		ResultSet rs = null;
+
+		try {
+			con = ConnectionOracle.getInstance();
+			getStatement = con.prepareStatement(findById);
+			getStatement.setLong(1, id);
+			logger.info("Select * from VISIT where visit_id = " + id);
+			rs = getStatement.executeQuery();
+
+			if (rs.next())
+				result = load(rs);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				getStatement.close();
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return result;
+
 	}
 
 	@Override
 	public List<Visit> findByQueryObject(QueryObject query) {
-		
+
 		Connection con = null;
 		PreparedStatement getStatement = null;
 		List<Visit> result = new ArrayList<Visit>();
@@ -99,8 +127,9 @@ public class VisitFinder implements IQueryFinder<Visit> {
 
 		try {
 			con = ConnectionOracle.getInstance();
-			getStatement = con.prepareStatement(getByQuery + query.generateWhereClause());
-			logger.info(getByQuery + query.generateWhereClause());
+			getStatement = con.prepareStatement(query.generateWhereSelectStatement());
+			query.setQuery(getStatement);
+			logger.info(query.generateWhereSelectStatement());
 			rs = getStatement.executeQuery();
 
 			while (rs.next())
@@ -116,12 +145,8 @@ public class VisitFinder implements IQueryFinder<Visit> {
 				e.printStackTrace();
 			}
 		}
-		
+
 		return result;
 	}
-
-	
-
-
 
 }

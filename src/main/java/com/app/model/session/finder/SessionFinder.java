@@ -61,7 +61,6 @@ public class SessionFinder implements IFinder<Session> {
 		return result;
 	}
 
-	@Override
 	public List<Session> getAll() {
 
 		Connection con = null;

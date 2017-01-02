@@ -47,18 +47,23 @@ CREATE TABLE uzytkownik_doktor (
 CREATE TABLE recepta(
 	recepta_id NUMBER NOT NULL, PRIMARY KEY(recepta_id),
 	recepta_uzytkownik_uz_id NUMBER NOT NULL, FOREIGN KEY (recepta_uzytkownik_uz_id) REFERENCES uzytkownik(uzytkownik_uz_id),
-	recepta_uzytkownik_doktor_id NUMBER NOT NULL, FOREIGN KEY (recepta_uzytkownik_doktor_id) REFERENCES uzytkownik_doktor(uzytkownik_doktor_id), 
+	recepta_uzytkownik_doktor_id NUMBER NOT NULL, FOREIGN KEY (recepta_uzytkownik_doktor_id) REFERENCES uzytkownik(uzytkownik_uz_id), 
 	recepta_date_of_issue DATE NOT NULL,
-	recepta_additional_rigths CHAR(1) NOT NULL
+	recepta_additional_rigths VARCHAR(1) NOT NULL
 );
 
 --poszczegolne leki w recepcie
 CREATE TABLE lek(
 	lek_id NUMBER NOT NULL, PRIMARY KEY(lek_id),
-	lek_recepta_id NUMBER NOT NULL, FOREIGN KEY (lek_recepta_id) REFERENCES recepta(recepta_id),
 	lek_name VARCHAR(200) not null,
 	lek_refund NUMBER not null --% refundacji
 );
+
+CREATE TABLE recepta_lek (
+	recepta_lek_id NUMBER NOT NULL, PRIMARY KEY(recepta_lek_id),
+	lek_id NUMBER NOT NULL, FOREIGN KEY (lek_id) REFERENCES lek(lek_id),
+	recepta_id NUMBER NOT NULL, FOREIGN KEY (recepta_id) REFERENCES recepta(recepta_id)
+)
 
 --dostepne rodzaje badan / wizyt
 CREATE TABLE visit_types(
@@ -74,7 +79,7 @@ visit_user_pacjent_id NUMBER, FOREIGN KEY (visit_user_pacjent_id) REFERENCES uzy
 visit_date_from DATE,
 visit_date_to DATE,
 visit_price NUMBER,
-visit_is_confirmed CHAR(1)
+visit_is_confirmed VARCHAR(1)
 );
 --wyniki badan
 CREATE TABLE lab(
@@ -111,6 +116,7 @@ drop table sample;
 drop table lab;
 drop table visit;
 drop table visit_types;
+drop table recepta_lek;
 drop table lek;
 drop table recepta;
 drop table uzytkownik_doktor;

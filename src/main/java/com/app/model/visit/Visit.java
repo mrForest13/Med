@@ -1,11 +1,18 @@
 package com.app.model.visit;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.sql.Types;
 
+import com.app.db.ConnectionOracle;
 import com.app.model.user.User;
 import com.app.transaction.Money;
 
 public class Visit {
+
+	private static final String updateStatementString = "UPDATE visit Set visit_user_pacjent_id = ? where visit_id = ?";
 
 	private Long id;
 	private User patient;
@@ -72,8 +79,8 @@ public class Visit {
 		this.visistConfirmed = visistConfirmed;
 	}
 
-	public Visit(Long id, User patient, User doctor, VisitType visitType, Timestamp visitDateFrom, Timestamp visitDateTo,
-			Money visitPrice, boolean visistConfirmed) {
+	public Visit(Long id, User patient, User doctor, VisitType visitType, Timestamp visitDateFrom,
+			Timestamp visitDateTo, Money visitPrice, boolean visistConfirmed) {
 		super();
 		this.id = id;
 		this.patient = patient;
@@ -98,6 +105,35 @@ public class Visit {
 
 	public void setVisitDateTo(Timestamp visitDateTo) {
 		this.visitDateTo = visitDateTo;
+	}
+
+	public void update() {
+
+		PreparedStatement insertStatement = null;
+		Connection con = null;
+
+		try {
+			con = ConnectionOracle.getInstance();
+
+			insertStatement = con.prepareStatement(updateStatementString);
+			
+			if (getPatient() == null)
+				insertStatement.setNull(1, Types.NULL);
+			else
+				insertStatement.setLong(1, getPatient().getId());
+			
+			insertStatement.setLong(2, getId());
+			insertStatement.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				insertStatement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 }

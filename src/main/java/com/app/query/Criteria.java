@@ -1,6 +1,12 @@
 package com.app.query;
 
-public class Criteria {
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+
+import oracle.net.aso.f;
+
+public abstract class Criteria {
 
 	private String sqlOperator;
 	private String field;
@@ -36,26 +42,28 @@ public class Criteria {
 		this.field = field;
 		this.value = value;
 	}
+	
+	protected abstract void setObject(PreparedStatement preparedStatement, int index) throws SQLException;
 
-	public static Criteria greaterThn(String fieldName, int value) {
-		return new Criteria(" > ", fieldName, new Integer(value));
+	public static Criteria greaterThan(String fieldName, Timestamp timestamp) {
+		return new TimestampCriteria(" > ", fieldName, timestamp);
 	}
 	
-	public static Criteria lessThn(String fieldName, int value) {
-		return new Criteria(" < ", fieldName, new Integer(value));
+	public static Criteria lessThan(String fieldName, Timestamp timestamp) {
+		return new TimestampCriteria(" < ", fieldName, timestamp);
 	}
 	
-	public static Criteria isNull(String fieldName) {
-		return new Criteria(" is ", fieldName, "NULL");
+	public static Criteria equalsLong(String fieldName, Long value) {
+		return new LongCriteria(" = ", fieldName, value);
 	}
 	
-	public static Criteria notNull(String fieldName) {
-		return new Criteria(" is not ", fieldName, "NULL");
+	public static Criteria equalsString(String fieldName, String value) {
+		return new StringCriteria(" = ", fieldName, value);
 	}
 	
 	@Override
 	public String toString() {
-		return field + sqlOperator + value.toString();
+		return field + sqlOperator + "?";
 	}
 
 }

@@ -7,9 +7,9 @@ import com.app.model.user.Patient;
 import com.app.registry.Registry;
 import com.app.transaction.TransactionScript;
 
-public class ShowUserData extends TransactionScript {
+public class GetUserData extends TransactionScript {
 
-	public ShowUserData(HttpServletRequest request, HttpServletResponse response) {
+	public GetUserData(HttpServletRequest request, HttpServletResponse response) {
 		super(request, response);
 	}
 	
