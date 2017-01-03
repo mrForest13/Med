@@ -72,6 +72,13 @@ visit_type VARCHAR(100),
 visit_type_referal_required VARCHAR(1) NOT NULL
 );
 
+CREATE TABLE referal(
+referal_id NUMBER NOT NULL, PRIMARY KEY(referal_id),
+referal_user_pacjent_id NUMBER NOT NULL, FOREIGN KEY(referal_user_pacjent_id) REFERENCES uzytkownik(uzytkownik_uz_id),
+referal_visit_type_id NUMBER NOT NULL, FOREIGN KEY(referal_visit_type_id) REFERENCES visit_types(visit_type_id),
+referal_is_used VARCHAR(1) NOT NULL
+);
+
 CREATE TABLE visit(
 visit_id NUMBER NOT NULL, PRIMARY KEY(visit_id),
 visit_uzytkownik_doktor_id NUMBER NOT NULL, FOREIGN KEY (visit_uzytkownik_doktor_id) REFERENCES uzytkownik(uzytkownik_uz_id),
@@ -111,6 +118,7 @@ CREATE SEQUENCE SESSION_SEQ
    START WITH 1;
 
 /*
+drop table referal;
 drop table uzytkownik_session;
 drop table sample;
 drop table lab;
@@ -124,6 +132,7 @@ drop table uzytkownik_lab;
 drop table uzytkownik_obsluga;
 drop table uzytkownik_pacjent;
 drop table uzytkownik;
+
 
 DROP SEQUENCE UZYTKOWNIK_SEQ;
 DROP SEQUENCE UZYTKOWNIK_P_SEQ;

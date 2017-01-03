@@ -12,7 +12,7 @@ public class ConnectionOracle {
 		
 		if(connection==null) {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "root", "root");
+			connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "hr", "hr");
 		}
 		
 		return connection;

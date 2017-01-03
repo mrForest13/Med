@@ -208,3 +208,14 @@ into sample values
 into sample values
 (9,4,'Rozmaz','50','40','70','RO / ML','wynik do konsultacji')
 select * from dual;
+
+--skierowania
+insert all into referal values
+(1,4,7,'N')
+into referal values
+(2,4,5,'N')
+into referal values
+(3,3,5,'N')
+into referal values
+(4,3,7,'N')
+select * from dual;
