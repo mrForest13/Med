@@ -26,6 +26,8 @@ public class Medicament {
 		this.lekName = lekName;
 		this.refundPercent = refundPercent;
 	}
+	
+	public Medicament() {}
 
 	@Override
 	public boolean equals(Object obj) {

@@ -5,33 +5,29 @@
 
 <div class="container">
 
-	<!--div class="row">
+
+	<div class="row">
 		<div class="col-md-6 col-md-offset-4">
 
 			<form class="form-inline" method="POST"
 				action="${contextPath}/med-1/service/patient">
 				<div class="form-group">
-					<select class="form-control" id="sel1">
-						<c:forEach var="visitType" items="${visitTypeList}">
-							<option>${visitType.visitType}</option>
-						</c:forEach>
-					</select>
-				</div>
-				<div class="form-group">
-					<input type="date" name="date" class="form-control" id="date">
+					<label for="email">Pesel:</label> <input type="text"
+						class="form-control" name="pesel" id="pesel">
 				</div>
 				<button type="submit" class="btn btn-primary">Szukaj</button>
 			</form>
 
 		</div>
-	</div-->
+	</div>
 
 	<table class="table table-striped">
-		<caption>Wolne terminy</caption>
+		<caption>Umowione Wizyty / Badania</caption>
 		<tr>
 			<th>Data wizyty</th>
 			<th>Lekarz</th>
 			<th>Rodzaj</th>
+			<th></th>
 			<th></th>
 		</tr>
 
@@ -42,7 +38,9 @@
 					${visit.getDoctor().lastName}</td>
 				<td>${visit.getVisitType().visitType}</td>
 				<td><a class="btn btn-primary"
-					href="${contextPath}/med-1/user/book/${visit.getId()}">rezerwuj</a></td>
+					href="${contextPath}/med-1/service/cancel/${visit.getId()}">anuluj</a></td>
+				<td><a class="btn btn-primary"
+					href="${contextPath}/med-1/service/confirm/${visit.getId()}">potwierdz</a></td>
 			</tr>
 		</c:forEach>
 	</table>

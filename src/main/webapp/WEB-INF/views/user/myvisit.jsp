@@ -6,7 +6,7 @@
 <div class="container">
 
 	<table class="table table-striped">
-		<caption>Umowione Wizyty</caption>
+		<caption>Umowione Wizyty / Badania</caption>
 		<tr>
 			<th>Data wizyty</th>
 			<th>Lekarz</th>
@@ -21,6 +21,26 @@
 					${visit.getDoctor().lastName}</td>
 				<td>${visit.getVisitType().visitType}</td>
 				<td><a class="btn btn-primary" href="${contextPath}/med-1/user/cancel/${visit.getId()}">anuluj</a></td>
+			</tr>
+		</c:forEach>
+	</table>
+	
+	<table class="table table-striped">
+		<caption>Wizyty potwierdzone przez obsluge</caption>
+		<tr>
+			<th>Data wizyty</th>
+			<th>Lekarz</th>
+			<th>Rodzaj</th>
+			<th></th>
+		</tr>
+
+		<c:forEach var="visit" items="${visitListP}">
+			<tr>
+				<td>${visit.visitDateFrom}</td>
+				<td>${visit.getDoctor().firstName}
+					${visit.getDoctor().lastName}</td>
+				<td>${visit.getVisitType().visitType}</td>
+				<td></td>
 			</tr>
 		</c:forEach>
 	</table>

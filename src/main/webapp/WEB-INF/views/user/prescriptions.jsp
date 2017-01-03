@@ -10,7 +10,8 @@
 		<tr>
 			<th>Data wystawienia</th>
 			<th>Lekarz Wystawiajacy</th>
-			<th></th>
+			<th>Leki</th>
+			<th/>
 		</tr>
 
 		<c:forEach var="prescription" items="${prescriptionList}">
@@ -18,7 +19,11 @@
 				<td>${prescription.dateOfIssue}</td>
 				<td>${prescription.getDoctor().firstName}
 					${prescription.getDoctor().lastName}</td>
-				<td><a class="btn btn-primary" href="${contextPath}/med-1/user/book/${visit.getId()}"> Zobacz Leki</a></td>
+				<td><c:forEach var="medicament"
+						items="${prescription.getMedicamentList()}">
+					${medicament.lekName} , 
+				</c:forEach></td>
+				<td><a class="btn btn-primary" href="">Pobierz pdf</a></td>
 			</tr>
 		</c:forEach>
 	</table>

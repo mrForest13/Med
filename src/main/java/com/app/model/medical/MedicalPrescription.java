@@ -65,10 +65,6 @@ public class MedicalPrescription {
 	}
 
 	public Set<Medicament> getMedicamentList() {
-
-		if (medicamentList == null)
-			medicamentList = MedicalPrescriptionFinder.getMedicamentsByMedicalPrescriptionId(id);
-
 		return medicamentList;
 	}
 

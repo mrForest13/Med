@@ -40,6 +40,7 @@ public class GetFreeVisitForPatient extends TransactionScript {
 	
 		QueryObject query = new QueryObject(VisitFinder.TABLE);
 		query.addCriteria(Criteria.greaterThan("visit_date_from", startSession));
+		query.addCriteria(Criteria.equalsString("visit_is_confirmed", "N"));
 		
 		Collection<Visit> visitsList = Registry.visitFinder().findByQueryObject(query);
 		

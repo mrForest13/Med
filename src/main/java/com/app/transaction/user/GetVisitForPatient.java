@@ -3,6 +3,7 @@ package com.app.transaction.user;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,9 +37,15 @@ public class GetVisitForPatient extends TransactionScript {
 		queryActualVisit.addCriteria(Criteria.greaterThan("visit_date_from", startSession));
 		queryActualVisit.addCriteria(Criteria.equalsLong("visit_user_pacjent_id", id));
 
-		List<Visit> visitsListA = Registry.visitFinder().findByQueryObject(queryActualVisit);
+		List<Visit> visitsListA = Registry.visitFinder().findByQueryObject(queryActualVisit).stream()
+				.filter(e -> !e.isVisistConfirmed()).collect(Collectors.toList());
 
 		getRequest().setAttribute("visitListA", visitsListA);
+		
+		List<Visit> visitsListP = Registry.visitFinder().findByQueryObject(queryActualVisit).stream()
+				.filter(e -> e.isVisistConfirmed()).collect(Collectors.toList());
+		
+		getRequest().setAttribute("visitListP", visitsListP);
 
 		QueryObject queryNoActualVisit = new QueryObject(VisitFinder.TABLE);
 		queryNoActualVisit.addCriteria(Criteria.lessThan("visit_date_from", startSession));

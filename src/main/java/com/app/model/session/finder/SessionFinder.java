@@ -92,7 +92,8 @@ public class SessionFinder implements IFinder<Session> {
 
 	private Session load(ResultSet rs) throws SQLException {
 
-		User user = Registry.userFinder().abstractFind(rs.getLong(2), UserFinder.TABLENAME);
+		User user = new User();
+		user.setId(rs.getLong(2));
 
 		Session result = new Session(rs.getLong(1), user, rs.getString(3), rs.getTimestamp(4),
 				rs.getString(5).equals("Y") ? true : false);

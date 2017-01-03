@@ -8,6 +8,8 @@
 		<put-attribute name="title" value="" />
 		<put-attribute name="usermenu"
 			value="/WEB-INF/views/template/usermenu.jsp" />
+		<put-attribute name="servicemenu"
+			value="/WEB-INF/views/template/servicemenu.jsp" />
 		<put-attribute name="homemenu" value="/WEB-INF/views/homemenu.jsp" />
 		<put-attribute name="body" value="" />
 		<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp" />
@@ -57,6 +59,12 @@
 		<put-attribute name="title" value="Recepty" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/user/prescriptions.jsp" />
+	</definition>
+	
+		<definition name="patientsearch" extends="base.definition">
+		<put-attribute name="title" value="Pacjent" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/service/patientsearch.jsp" />
 	</definition>
 
 </tiles-definitions>

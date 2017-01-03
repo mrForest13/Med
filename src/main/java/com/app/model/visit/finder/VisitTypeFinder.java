@@ -22,7 +22,36 @@ public class VisitTypeFinder implements IFinder<VisitType> {
 	private static final Logger logger = LoggerFactory.getLogger(VisitTypeFinder.class);
 
 	private static final String byId = "Select * from VISIT_TYPES where visit_type_id = ?";
+	private final String getAll = "Select * from VISIT_TYPES";
 
+	public List<VisitType> getAll() {
+
+		Connection con = null;
+		List<VisitType> result = new ArrayList<VisitType>();
+
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "root", "root");
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(getAll);
+
+			while (rs.next())
+				result.add(new VisitType(rs.getLong(1), rs.getString(2)));
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return result;
+	}
+
+	
 	@Override
 	public VisitType findById(Long id) {
 		

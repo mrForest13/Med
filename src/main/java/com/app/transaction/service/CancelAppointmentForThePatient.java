@@ -1,4 +1,4 @@
-package com.app.transaction.user;
+package com.app.transaction.service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,12 +22,19 @@ public class CancelAppointmentForThePatient extends TransactionScript {
 		super(request, response);
 	}
 	
+	public CancelAppointmentForThePatient(HttpServletRequest request, HttpServletResponse response, RedirectAttributes redirectAttributes) {
+		super(request, response);
+		this.redirectAttributes = redirectAttributes;
+	}
+	
 	@Override
 	public void run() throws Exception {
 		
 		Long id = PathVariable.getIdFromUrl(getRequest().getRequestURL().toString());
 		
 		Visit visit  = Registry.visitFinder().findById(id);
+		
+		redirectAttributes.addAttribute("pesel", ((Patient)visit.getPatient()).getPesel());
 		
 		visit.setPatient(null);
 		

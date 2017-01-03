@@ -8,6 +8,8 @@ import java.sql.Timestamp;
 
 import com.app.db.ConnectionOracle;
 import com.app.model.user.User;
+import com.app.model.user.finder.UserFinder;
+import com.app.registry.Registry;
 
 public class Session {
 
@@ -30,6 +32,10 @@ public class Session {
 	}
 
 	public User getUser() {
+
+		if (user.getLogin() == null)
+			user = Registry.userFinder().abstractFind(user.getId(), UserFinder.TABLENAME);
+
 		return user;
 	}
 

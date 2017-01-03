@@ -69,12 +69,12 @@ public class MedicalPrescriptionFinder {
 		
 		MedicalPrescription result = new MedicalPrescription(id, patient, doctor, dateOfIssue, additionalRight);
 		
-		result.setMedicamentList(null);
+		result.setMedicamentList(getMedicamentsByMedicalPrescriptionId(id));
 		
 		return result;
 	}
 	
-	public static Set<Medicament> getMedicamentsByMedicalPrescriptionId(Long id) {
+	private Set<Medicament> getMedicamentsByMedicalPrescriptionId(Long id) {
 		
 		Connection con = null;
 		PreparedStatement getStatement = null;
@@ -105,7 +105,7 @@ public class MedicalPrescriptionFinder {
 		return result;
 	}
 	
-	private static Medicament getMedicamentById(Long id) {
+	private Medicament getMedicamentById(Long id) {
 		
 		Connection con = null;
 		PreparedStatement getStatement = null;

@@ -23,8 +23,8 @@
 				<c:when test="${type == 0}">
 					<tiles:insertAttribute name="usermenu" />
 				</c:when>
-				<c:when test="${type > 0}">
-					<tiles:insertAttribute name="usermenu" />
+				<c:when test="${type == 3}">
+					<tiles:insertAttribute name="servicemenu" />
 				</c:when>
 				<c:when test="${type == -1}">
 					<tiles:insertAttribute name="homemenu" />

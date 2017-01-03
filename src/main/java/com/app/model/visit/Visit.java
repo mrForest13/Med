@@ -12,7 +12,7 @@ import com.app.transaction.Money;
 
 public class Visit {
 
-	private static final String updateStatementString = "UPDATE visit Set visit_user_pacjent_id = ? where visit_id = ?";
+	private static final String updateStatementString = "UPDATE visit Set visit_user_pacjent_id = ?, visit_is_confirmed = ? where visit_id = ?";
 
 	private Long id;
 	private User patient;
@@ -122,7 +122,8 @@ public class Visit {
 			else
 				insertStatement.setLong(1, getPatient().getId());
 			
-			insertStatement.setLong(2, getId());
+			insertStatement.setString(2, isVisistConfirmed() ? "Y" : "N");
+			insertStatement.setLong(3, getId());
 			insertStatement.executeUpdate();
 
 		} catch (Exception e) {

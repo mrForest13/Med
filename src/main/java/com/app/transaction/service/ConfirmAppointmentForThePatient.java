@@ -1,4 +1,4 @@
-package com.app.transaction.user;
+package com.app.transaction.service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,28 +13,32 @@ import com.app.path.PathVariable;
 import com.app.registry.Registry;
 import com.app.transaction.TransactionScript;
 
-public class CancelAppointmentForThePatient extends TransactionScript {
+public class ConfirmAppointmentForThePatient extends TransactionScript {
 
-	private static final Logger logger = LoggerFactory.getLogger(CancelAppointmentForThePatient.class);
+	private static final Logger logger = LoggerFactory.getLogger(ConfirmAppointmentForThePatient.class);
 	private RedirectAttributes redirectAttributes;
-	
-	public CancelAppointmentForThePatient(HttpServletRequest request, HttpServletResponse response) {
+
+	public ConfirmAppointmentForThePatient(HttpServletRequest request, HttpServletResponse response,
+			RedirectAttributes redirectAttributes) {
 		super(request, response);
+		this.redirectAttributes = redirectAttributes;
 	}
-	
+
 	@Override
 	public void run() throws Exception {
-		
+
 		Long id = PathVariable.getIdFromUrl(getRequest().getRequestURL().toString());
-		
-		Visit visit  = Registry.visitFinder().findById(id);
-		
-		visit.setPatient(null);
-		
+
+		Visit visit = Registry.visitFinder().findById(id);
+
+		redirectAttributes.addAttribute("pesel", ((Patient)visit.getPatient()).getPesel());
+
+		visit.setVisistConfirmed(true);
+
 		logger.info(visit.toString());
-		
+
 		visit.update();
-		
+
 	}
 
 }

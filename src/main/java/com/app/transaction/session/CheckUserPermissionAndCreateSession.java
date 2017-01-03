@@ -31,6 +31,8 @@ public class CheckUserPermissionAndCreateSession extends TransactionScript {
 		String password = getRequest().getParameter("password");
 
 		User user = Registry.userFinder().findByLogin(login);
+		
+		logger.info(user.toString());
 
 		if (user == null || !user.getPassword().equals(password))
 			throw new Exception();
