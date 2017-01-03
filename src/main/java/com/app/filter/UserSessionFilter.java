@@ -49,12 +49,8 @@ public class UserSessionFilter extends SessionFilter implements Filter {
 		}
 
 		Session session = Registry.sessionFinder().findById(userId);
-
-		logger.info(session.toString());
 		
 		String path = httpServletRequest.getRequestURL().toString();
-
-		logger.info("Session if: " + session.getUser().getUserType() + "  " + getUserTypeFromUrl(path));
 		
 		if (session != null && sessionId.equals(session.getSessionHash()) && session.isSessionIsActive()
 				&& session.getUser().getUserType() == getUserTypeFromUrl(path)) {

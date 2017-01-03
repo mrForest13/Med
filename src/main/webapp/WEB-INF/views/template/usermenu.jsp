@@ -10,7 +10,7 @@
 			<a class="navbar-brand" href="">Przychodnia</a>
 		</div>
 		<ul class="nav navbar-nav">
-			<li><a href="${contextPath}/user/visit">Umow wizyte / badanie</a></li>
+			<li><a href="${contextPath}/user/search">Umow wizyte / badanie</a></li>
 			<li><a href="${contextPath}/user/myvisit">Moje wizyty</a></li>
 			<li><a href="#">Wyniki badan</a></li>
 			<li><a href="#">Skierowania</a></li>

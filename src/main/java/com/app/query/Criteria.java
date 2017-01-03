@@ -1,5 +1,6 @@
 package com.app.query;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -59,6 +60,10 @@ public abstract class Criteria {
 	
 	public static Criteria equalsString(String fieldName, String value) {
 		return new StringCriteria(" = ", fieldName, value);
+	}
+	
+	public static Criteria equalsDate(String fieldName, Date timestamp) {
+		return new DateCriteria(" = ", fieldName, timestamp);
 	}
 	
 	@Override

@@ -16,21 +16,21 @@ import com.app.model.user.User;
 public class PatientFinder extends UserFinder implements IUserFinder<Patient> {
 
 	private static final Logger logger = LoggerFactory.getLogger(PatientFinder.class);
-	
+
 	public final static int TYPE = 0;
 	public static final String TABLENAME = "Uzytkownik_Pacjent";
 	private static final String getByPesel = "Select * from Uzytkownik_pacjent where uzytkownik_pacjent_pesel = ?";
-	
+
 	public Patient find(Long id) {
 		return (Patient) abstractFind(id, TABLENAME);
 	}
-	
+
 	public void load(User user) {
 		super.load(user);
 		Patient patient = (Patient) user;
-		
+
 		Load e = new Load() {
-			
+
 			@Override
 			public void load(ResultSet rs) {
 				try {
@@ -42,16 +42,16 @@ public class PatientFinder extends UserFinder implements IUserFinder<Patient> {
 					patient.setGender(rs.getString(7).charAt(0));
 				} catch (SQLException e) {
 					e.printStackTrace();
-				}			
+				}
 			}
 		};
-		
+
 		findRow(user.getId(), TABLENAME, e);
-	
+
 	}
-	
+
 	public Patient findByPesel(String pesel) {
-		
+
 		Connection con = null;
 		PreparedStatement getStatement = null;
 		Patient result = null;
@@ -64,9 +64,7 @@ public class PatientFinder extends UserFinder implements IUserFinder<Patient> {
 			logger.info("Select * from Uzytkownik_pacjent where uzytkownik_pacjent_pesel = " + pesel);
 			rs = getStatement.executeQuery();
 
-			
-			
-			if (rs.next()){
+			if (rs.next()) {
 				result = new Patient();
 				result.setId(rs.getLong(2));
 				load(result);
@@ -82,14 +80,14 @@ public class PatientFinder extends UserFinder implements IUserFinder<Patient> {
 				e.printStackTrace();
 			}
 		}
-		
-		return result;
-		
-	}
 
+		return result;
+
+	}
+	
 	@Override
 	protected User getUserObject() {
 		return new Patient();
 	}
-	
+
 }

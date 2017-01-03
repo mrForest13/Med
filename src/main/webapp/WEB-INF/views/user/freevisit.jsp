@@ -5,15 +5,24 @@
 
 <div class="container">
 
-	<!--div class="row">
-		<div class="col-md-6 col-md-offset-4">
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
 
 			<form class="form-inline" method="POST"
-				action="${contextPath}/med-1/service/patient">
+				action="${contextPath}/med-1/user/visit">
 				<div class="form-group">
-					<select class="form-control" id="sel1">
+					<select class="form-control" name="visitType" id="sel1">
+						<option value="" selected>-- Rodzaj Wizyty Lub Badania --</option>
 						<c:forEach var="visitType" items="${visitTypeList}">
 							<option>${visitType.visitType}</option>
+						</c:forEach>
+					</select>
+				</div>
+				<div class="form-group">
+					<select class="form-control" name="lastName" id="sel2">
+						<option value="" selected>-- Nazwisko Lekarza --</option>
+						<c:forEach var="doctor" items="${doctorList}">
+							<option>${doctor.lastName}</option>
 						</c:forEach>
 					</select>
 				</div>
@@ -22,9 +31,8 @@
 				</div>
 				<button type="submit" class="btn btn-primary">Szukaj</button>
 			</form>
-
 		</div>
-	</div-->
+	</div>
 
 	<table class="table table-striped">
 		<caption>Wolne terminy</caption>

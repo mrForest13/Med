@@ -10,10 +10,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.app.model.medical.MedicalPrescription;
 import com.app.model.medical.Medicament;
 import com.app.model.medical.finder.MedicalPrescriptionFinder;
+import com.app.model.user.Doctor;
+import com.app.model.user.finder.DoctorFinder;
 import com.app.model.visit.VisitType;
 import com.app.model.visit.finder.VisitTypeFinder;
 import com.app.registry.Registry;
@@ -21,6 +24,8 @@ import com.app.transaction.TransactionScript;
 import com.app.transaction.user.BookAppointmentForThePatient;
 import com.app.transaction.user.CancelAppointmentForThePatient;
 import com.app.transaction.user.GetFreeVisitForPatient;
+import com.app.transaction.user.GetMedicalPrescriptionForPatient;
+import com.app.transaction.user.GetSearchOptionForVisit;
 import com.app.transaction.user.GetUserData;
 import com.app.transaction.user.GetVisitForPatient;
 import com.app.transaction.user.UpdateUserData;
@@ -31,120 +36,84 @@ public class UserController {
 
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
-	@RequestMapping(value = "/visit", method = RequestMethod.GET)
-	public String registrationUser(HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping(value = "/visit", method = { RequestMethod.POST, RequestMethod.GET })
+	public String registrationUser(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		TransactionScript transactionScript = new GetFreeVisitForPatient(request, response);
+		TransactionScript transactionScript1 = new GetFreeVisitForPatient(request, response);
+		TransactionScript transactionScript2 = new GetSearchOptionForVisit(request, response);
 
-		try {
-			transactionScript.run();
-		} catch (Exception e) {
-			e.printStackTrace();
-			return "redirect:/blad";// TO DO
-		}
+		transactionScript1.run();
+		transactionScript2.run();
 
-		VisitType visit = new VisitType();
+		return "freevisit";
+	}
 
-		request.setAttribute("visitType", visit);
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
+	public String searchVisit(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		List<VisitType> visitsTypeList = ((VisitTypeFinder)Registry.visitTypeFinder()).getAll();
+		TransactionScript transactionScript = new GetSearchOptionForVisit(request, response);
 
-		request.setAttribute("visitTypeList", visitsTypeList);
+		transactionScript.run();
 
 		return "freevisit";
 	}
 
 	@RequestMapping(value = "/mypage", method = RequestMethod.GET)
-	public String userProfil(HttpServletRequest request, HttpServletResponse response) {
+	public String userProfil(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		TransactionScript transactionScript = new GetUserData(request, response);
 
-		try {
-			transactionScript.run();
-		} catch (Exception e) {
-			e.printStackTrace();
-			return "redirect:/blad";// TO DO
-		}
+		transactionScript.run();
 
 		return "userpage";
 	}
 
 	@RequestMapping(value = "/mypage", method = RequestMethod.POST)
-	public String userProfilUpdate(HttpServletRequest request, HttpServletResponse response) {
+	public String userProfilUpdate(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		TransactionScript transactionScript = new UpdateUserData(request, response);
 
-		try {
-			transactionScript.run();
-		} catch (Exception e) {
-			e.printStackTrace();
-			return "redirect:/blad";// TO DO
-		}
+		transactionScript.run();
 
 		return "redirect:/user/mypage";
 	}
 
 	@RequestMapping(value = "/myvisit", method = RequestMethod.GET)
-	public String getMyVisit(HttpServletRequest request, HttpServletResponse response) {
+	public String getMyVisit(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		TransactionScript transactionScript = new GetVisitForPatient(request, response);
 
-		try {
-			transactionScript.run();
-		} catch (Exception e) {
-			e.printStackTrace();
-			return "redirect:/blad";// TO DO
-		}
+		transactionScript.run();
 
 		return "myvisit";
 	}
 
 	@RequestMapping(value = "/cancel/{id}", method = RequestMethod.GET)
-	public String cancelAppointment(HttpServletRequest request, HttpServletResponse response) {
+	public String cancelAppointment(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		TransactionScript transactionScript = new CancelAppointmentForThePatient(request, response);
 
-		try {
-			transactionScript.run();
-		} catch (Exception e) {
-			e.printStackTrace();
-			return "redirect:/blad";// TO DO
-		}
+		transactionScript.run();
 
 		return "redirect:/user/myvisit";
 	}
 
 	@RequestMapping(value = "/book/{id}", method = RequestMethod.GET)
-	public String bookAppointment(HttpServletRequest request, HttpServletResponse response) {
+	public String bookAppointment(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		TransactionScript transactionScript = new BookAppointmentForThePatient(request, response);
 
-		try {
-			transactionScript.run();
-		} catch (Exception e) {
-			e.printStackTrace();
-			return "redirect:/blad";// TO DO
-		}
+		transactionScript.run();
 
 		return "redirect:/user/myvisit";
 	}
 
 	@RequestMapping(value = "/prescriptions", method = RequestMethod.GET)
-	public String getMedicalPrescription(HttpServletRequest request, HttpServletResponse response) {
+	public String getMedicalPrescription(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		Long id = (Long) request.getAttribute("userId");
+		TransactionScript transactionScript = new GetMedicalPrescriptionForPatient(request, response);
 
-		MedicalPrescriptionFinder prescription = new MedicalPrescriptionFinder();
-
-		request.setAttribute("prescription", prescription);
-
-		List<MedicalPrescription> prescriptionList = Registry.medicalPrescriptionFinder().findByUserId(id);
-
-		request.setAttribute("prescriptionList", prescriptionList);
-
-		Medicament medicament = new Medicament();
-
-		request.setAttribute("medicament", medicament);
+		transactionScript.run();
 
 		return "prescriptions";
 	}

@@ -28,7 +28,6 @@ import com.app.transaction.TransactionScript;
 import com.app.transaction.service.CancelAppointmentForThePatient;
 import com.app.transaction.service.ConfirmAppointmentForThePatient;
 
-
 @Controller
 @RequestMapping("/service")
 public class ServiceController {
@@ -51,52 +50,45 @@ public class ServiceController {
 		Patient user = ((PatientFinder) Registry.patientFinder()).findByPesel(request.getParameter("pesel"));
 
 		if (user != null) {
-			
+
 			Timestamp startSession = new Timestamp(Calendar.getInstance().getTime().getTime());
 
 			QueryObject query = new QueryObject(VisitFinder.TABLE);
 			query.addCriteria(Criteria.greaterThan("visit_date_from", startSession));
 			query.addCriteria(Criteria.equalsLong("visit_user_pacjent_id", user.getId()));
 			query.addCriteria(Criteria.equalsString("visit_is_confirmed", "N"));
-			
+
 			List<Visit> visitsList = Registry.visitFinder().findByQueryObject(query);
 
 			request.setAttribute("visitList", visitsList);
-			
+
 			request.setAttribute("pesel", user.getPesel());
-			
+
 		}
 
 		return "patientsearch";
 	}
-	
-	@RequestMapping(value = "/cancel/{id}", method = RequestMethod.GET)
-	public String cancelAppointment(HttpServletRequest request, HttpServletResponse response, RedirectAttributes redirectAttributes) {
-		
-		TransactionScript transactionScript = new CancelAppointmentForThePatient(request, response,redirectAttributes);
 
-		try {
-			transactionScript.run();
-		} catch (Exception e) {
-			e.printStackTrace();
-			return "redirect:/blad";//TO DO
-		}
-				
+	@RequestMapping(value = "/cancel/{id}", method = RequestMethod.GET)
+	public String cancelAppointment(HttpServletRequest request, HttpServletResponse response,
+			RedirectAttributes redirectAttributes) throws Exception {
+
+		TransactionScript transactionScript = new CancelAppointmentForThePatient(request, response, redirectAttributes);
+
+		transactionScript.run();
+
 		return "redirect:/service/patient";
 	}
-	
-	@RequestMapping(value = "/confirm/{id}", method = RequestMethod.GET)
-	public String confirmAppointment(HttpServletRequest request, HttpServletResponse response, RedirectAttributes redirectAttributes) {
-		
-		TransactionScript transactionScript = new ConfirmAppointmentForThePatient(request, response,redirectAttributes);
 
-		try {
-			transactionScript.run();
-		} catch (Exception e) {
-			e.printStackTrace();
-			return "redirect:/blad";//TO DO
-		}
-				
+	@RequestMapping(value = "/confirm/{id}", method = RequestMethod.GET)
+	public String confirmAppointment(HttpServletRequest request, HttpServletResponse response,
+			RedirectAttributes redirectAttributes) throws Exception {
+
+		TransactionScript transactionScript = new ConfirmAppointmentForThePatient(request, response,
+				redirectAttributes);
+
+		transactionScript.run();
+
 		return "redirect:/service/patient";
 	}
 
