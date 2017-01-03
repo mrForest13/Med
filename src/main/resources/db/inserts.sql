@@ -127,19 +127,19 @@ select * from dual;
 
 --typy wizyt
 insert all into visit_types values
-(1,'Internista')
+(1,'Internista','N')
 into visit_types values
-(2,'Stomatolog')
+(2,'Stomatolog','N')
 into visit_types values
-(3,'Dermatolog')
+(3,'Dermatolog','N')
 into visit_types values
-(4,'Chirurg stomatolog')
+(4,'Chirurg stomatolog','N')
 into visit_types values
-(5,'Neurochirurg')
+(5,'Neurochirurg','Y')
 into visit_types values
-(6,'Morfologia')
+(6,'Laboratorium','N')
 into visit_types values
-(7,'Plytki krwi')
+(7,'Ginekolog','Y')
 select * from dual;
 
 --wizyty
@@ -167,17 +167,25 @@ into visit values
 (11,7,3,1,TO_DATE('2017-01-02 15:30','YYYY-MM-DD HH24:MI'),TO_DATE('2016-01-02 16:30','YYYY-MM-DD HH24:MI'),0,'Y')
 into visit values
 (12,7,3,'',TO_DATE('2017-01-07 16:30','YYYY-MM-DD HH24:MI'),TO_DATE('2017-01-07 17:00','YYYY-MM-DD HH24:MI'),100,'N')
+into visit values --LABORATORIUM
+(13,7,3,'',TO_DATE('2017-02-07 16:30','YYYY-MM-DD HH24:MI'),TO_DATE('2017-02-07 17:00','YYYY-MM-DD HH24:MI'),0,'N')
+into visit values
+(14,7,3,'',TO_DATE('2017-03-07 16:30','YYYY-MM-DD HH24:MI'),TO_DATE('2017-03-07 17:00','YYYY-MM-DD HH24:MI'),0,'N')
+into visit values
+(15,7,3,'',TO_DATE('2017-04-07 16:30','YYYY-MM-DD HH24:MI'),TO_DATE('2017-04-07 17:00','YYYY-MM-DD HH24:MI'),0,'N')
+into visit values
+(16,7,3,'',TO_DATE('2017-05-07 16:30','YYYY-MM-DD HH24:MI'),TO_DATE('2017-05-07 17:00','YYYY-MM-DD HH24:MI'),0,'N')
 select * from dual;
 
 --badania lab
 insert all into lab values
-(1,1,'2016-12-10','')
+(1,13,'')
 into lab values
-(2,1,'2016-12-11','')
+(2,14,'')
 into lab values
-(3,1,'2016-12-12','')
+(3,15,'')
 into lab values
-(4,2,'2016-09-30','')
+(4,16,'')
 select * from dual;
 
 --poszczegolne wyniki

@@ -63,12 +63,13 @@ CREATE TABLE recepta_lek (
 	recepta_lek_id NUMBER NOT NULL, PRIMARY KEY(recepta_lek_id),
 	lek_id NUMBER NOT NULL, FOREIGN KEY (lek_id) REFERENCES lek(lek_id),
 	recepta_id NUMBER NOT NULL, FOREIGN KEY (recepta_id) REFERENCES recepta(recepta_id)
-)
+);
 
 --dostepne rodzaje badan / wizyt
 CREATE TABLE visit_types(
 visit_type_id NUMBER NOT NULL, PRIMARY KEY(visit_type_id),
-visit_type VARCHAR(100)
+visit_type VARCHAR(100),
+visit_type_referal_required VARCHAR(1) NOT NULL
 );
 
 CREATE TABLE visit(
@@ -84,8 +85,7 @@ visit_is_confirmed VARCHAR(1)
 --wyniki badan
 CREATE TABLE lab(
 lab_id NUMBER NOT NULL, PRIMARY KEY(lab_id),
-lab_uzytkownik_uz_id NUMBER NOT NULL, FOREIGN KEY (lab_uzytkownik_uz_id) REFERENCES uzytkownik(uzytkownik_uz_id),
-lab_date DATE NOT NULL,
+lab_visit_id NUMBER NOT NULL, FOREIGN KEY (lab_visit_id) REFERENCES visit(visit_id),
 lab_file BLOB --zapisywanie wygenerowanego pdfa?
 );
 
@@ -104,7 +104,7 @@ session_id NUMBER NOT NULL, PRIMARY KEY(session_id),
 session_uzytkownik_uz_id NUMBER NOT NULL, FOREIGN KEY (session_uzytkownik_uz_id) REFERENCES uzytkownik(uzytkownik_uz_id),
 session_hash VARCHAR(200) NOT NULL,
 session_date DATE,
-session_is_active CHAR(1)
+session_is_active VARCHAR(1)
 );
 
 CREATE SEQUENCE SESSION_SEQ
