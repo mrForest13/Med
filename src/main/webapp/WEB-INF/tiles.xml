@@ -12,6 +12,10 @@
 			value="/WEB-INF/views/template/servicemenu.jsp" />
 		<put-attribute name="homemenu"
 			value="/WEB-INF/views/template/homemenu.jsp" />
+		<put-attribute name="doktormenu"
+			value="/WEB-INF/views/template/doktormenumenu.jsp" />
+		<put-attribute name="homemenu"
+			value="/WEB-INF/views/template/labmenu.jsp" />
 		<put-attribute name="body" value="" />
 		<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp" />
 	</definition>
@@ -73,5 +77,11 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/user/showreferal.jsp" />
 	</definition>
+
+	<definition name="doktorpatientsearch" extends="base.definition">
+		<put-attribute name="title" value="doktor" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/doktor/doktorpatientsearch.jsp" />
+	</definition>	
 
 </tiles-definitions>
