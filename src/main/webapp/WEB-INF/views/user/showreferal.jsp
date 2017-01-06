@@ -8,12 +8,14 @@
 	<table class="table table-striped">
 		<caption>Dostepne Skierowania</caption>
 		<tr>
+			<th>Data Wystawienia</th>
 			<th>Typ Wizyty / Badania</th>
 			<th>Lekarz</th>
 		</tr>
 
 		<c:forEach var="referal" items="${referalListN}">
 			<tr>
+				<td>${referal.dateOfissue}</td>
 				<td>${referal.getVisitType().visitType}</td>
 				<td>${referal.getDoctor().firstName}
 					${referal.getDoctor().lastName}</td>
@@ -24,12 +26,14 @@
 	<table class="table table-striped">
 		<caption>Wykorzystane Skierowania</caption>
 		<tr>
+			<th>Data Wystawienia</th>
 			<th>Typ Wizyty / Badania</th>
 			<th>Lekarz</th>
 		</tr>
 
 		<c:forEach var="referal" items="${referalListY}">
 			<tr>
+				<td>${referal.dateOfissue}</td>
 				<td>${referal.getVisitType().visitType}</td>
 				<td>${referal.getDoctor().firstName}
 					${referal.getDoctor().lastName}</td>

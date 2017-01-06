@@ -1,6 +1,7 @@
 package com.app.model.medical.finder;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,7 +14,6 @@ import org.slf4j.LoggerFactory;
 import com.app.dao.IQueryFinder;
 import com.app.db.ConnectionOracle;
 import com.app.model.medical.Referal;
-import com.app.model.user.Doctor;
 import com.app.model.user.User;
 import com.app.model.visit.VisitType;
 import com.app.query.QueryObject;
@@ -75,7 +75,9 @@ public class ReferalFinder implements IQueryFinder<Referal> {
 		
 		User doctor = Registry.doctorFinder().findById(rs.getLong(3));
 		
-		Referal result = new Referal(id, user,doctor, visitType, used);
+		Date dateOfissue = rs.getDate(6);
+		
+		Referal result = new Referal(id, user,doctor, visitType, used,dateOfissue);
 		
 		logger.info(result.toString());
 		

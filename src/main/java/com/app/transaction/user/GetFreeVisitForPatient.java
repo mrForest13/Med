@@ -82,8 +82,8 @@ public class GetFreeVisitForPatient extends TransactionScript {
 		queryReferal.addCriteria(Criteria.equalsString("REFERAL_IS_USED", "N"));
 
 		List<Referal> referalList = Registry.referalFinder().findByQueryObject(queryReferal);
-
-		Set<Referal> referalSet = new HashSet<Referal>(referalList);
+		
+		logger.info(referalList.toString());
 
 		List<Visit> results = new ArrayList<Visit>();
 
@@ -91,7 +91,11 @@ public class GetFreeVisitForPatient extends TransactionScript {
 			if (!v.getVisitType().isReferalRequired())
 				results.add(v);
 			else {
-				if (referalSet.contains(v.getVisitType()))
+				
+				Referal r = new Referal();
+				r.setVisitType(v.getVisitType());
+				
+				if (referalList.contains(r))
 					results.add(v);
 			}
 		}
