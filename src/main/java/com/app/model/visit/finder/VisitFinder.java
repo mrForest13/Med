@@ -30,7 +30,7 @@ public class VisitFinder implements IQueryFinder<Visit> {
 
 	private static final String findById = "Select * from VISIT where visit_id = ?";
 	private static final String getAll = "Select * from VISIT";
-	public static final String TABLE = "Visit";
+	public static final String TABLENAME = "Visit";
 
 	public List<Visit> getAll() {
 
@@ -67,9 +67,9 @@ public class VisitFinder implements IQueryFinder<Visit> {
 		Long id = rs.getLong(1);
 		Long userId = rs.getLong(4);
 
-		Doctor doctor = Registry.doctorFinder().find(rs.getLong(2));
+		Doctor doctor = Registry.doctorFinder().findById(rs.getLong(2));
 
-		Patient patient = userId != null ? Registry.patientFinder().find(userId) : null;
+		Patient patient = userId != null ? Registry.patientFinder().findById(userId) : null;
 
 		VisitType visitType = Registry.visitTypeFinder().findById(rs.getLong(3));
 

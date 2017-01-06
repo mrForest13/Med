@@ -33,7 +33,7 @@ public class GetVisitForPatient extends TransactionScript {
 
 		Timestamp startSession = new Timestamp(Calendar.getInstance().getTime().getTime());
 
-		QueryObject queryActualVisit = new QueryObject(VisitFinder.TABLE);
+		QueryObject queryActualVisit = new QueryObject(VisitFinder.TABLENAME);
 		queryActualVisit.addCriteria(Criteria.greaterThan("visit_date_from", startSession));
 		queryActualVisit.addCriteria(Criteria.equalsLong("visit_user_pacjent_id", id));
 
@@ -47,7 +47,7 @@ public class GetVisitForPatient extends TransactionScript {
 		
 		getRequest().setAttribute("visitListP", visitsListP);
 
-		QueryObject queryNoActualVisit = new QueryObject(VisitFinder.TABLE);
+		QueryObject queryNoActualVisit = new QueryObject(VisitFinder.TABLENAME);
 		queryNoActualVisit.addCriteria(Criteria.lessThan("visit_date_from", startSession));
 		queryNoActualVisit.addCriteria(Criteria.equalsLong("visit_user_pacjent_id", id));
 		queryNoActualVisit.addCriteria(Criteria.equalsString("visit_is_Confirmed", "Y"));

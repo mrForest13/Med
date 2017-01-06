@@ -38,7 +38,7 @@ public class GetFreeVisitForPatient extends TransactionScript {
 
 		Timestamp startSession = new Timestamp(Calendar.getInstance().getTime().getTime());
 
-		QueryObject query = new QueryObject(VisitFinder.TABLE);
+		QueryObject query = new QueryObject(VisitFinder.TABLENAME);
 
 		if (getRequest().getParameter("date").isEmpty())
 			query.addCriteria(Criteria.greaterThan("visit_date_from", startSession));

@@ -1,15 +1,18 @@
 package com.app.registry;
 
 import com.app.dao.IFinder;
+import com.app.dao.IFinderAll;
 import com.app.dao.IQueryFinder;
+import com.app.dao.IUserFinder;
 import com.app.model.medical.MedicalPrescription;
+import com.app.model.medical.Referal;
 import com.app.model.medical.finder.MedicalPrescriptionFinder;
+import com.app.model.medical.finder.ReferalFinder;
 import com.app.model.session.Session;
 import com.app.model.session.finder.SessionFinder;
 import com.app.model.user.Doctor;
 import com.app.model.user.Patient;
 import com.app.model.user.finder.DoctorFinder;
-import com.app.model.user.finder.IUserFinder;
 import com.app.model.user.finder.PatientFinder;
 import com.app.model.user.finder.UserFinder;
 import com.app.model.visit.Visit;
@@ -23,11 +26,12 @@ public class Registry {
 	
 	private IFinder<VisitType> visitTypeFinder = new VisitTypeFinder();
 	private IQueryFinder<Visit> visitFinder = new VisitFinder();
-	private IUserFinder<Patient> patientFinder = new PatientFinder();
-	private IUserFinder<Doctor> doctorFinder = new DoctorFinder();
+	private IFinder<Patient> patientFinder = new PatientFinder();
+	private IFinderAll<Doctor> doctorFinder = new DoctorFinder();
 	private UserFinder userFinder = new UserFinder();
-	private SessionFinder sessionFinder = new SessionFinder();
-	private MedicalPrescriptionFinder medicalPrescriptionFinder = new MedicalPrescriptionFinder();
+	private IFinderAll<Session> sessionFinder = new SessionFinder();
+	private IUserFinder<MedicalPrescription> medicalPrescriptionFinder = new MedicalPrescriptionFinder();
+	private IQueryFinder<Referal> referalFinder = new ReferalFinder();
 
 	private Registry() {}
 	
@@ -43,11 +47,11 @@ public class Registry {
 		return getInstance().visitFinder;
 	}
 	
-	public static IUserFinder<Patient> patientFinder() {
+	public static IFinder<Patient> patientFinder() {
 		return getInstance().patientFinder;
 	}
 	
-	public static IUserFinder<Doctor> doctorFinder() {
+	public static IFinderAll<Doctor> doctorFinder() {
 		return getInstance().doctorFinder;
 	}
 	
@@ -55,11 +59,15 @@ public class Registry {
 		return getInstance().userFinder;
 	}
 	
-	public static SessionFinder sessionFinder() {
+	public static IFinderAll<Session> sessionFinder() {
 		return getInstance().sessionFinder;
 	}
 	
-	public static MedicalPrescriptionFinder medicalPrescriptionFinder() {
+	public static IUserFinder<MedicalPrescription> medicalPrescriptionFinder() {
 		return getInstance().medicalPrescriptionFinder;
+	}
+	
+	public static IQueryFinder<Referal> referalFinder() {
+		return getInstance().referalFinder;
 	}
 }

@@ -28,7 +28,7 @@ public class UpdateUserData extends TransactionScript {
 		String oldPassword = getRequest().getParameter("oldpassword");
 		String newPassword = getRequest().getParameter("newpassword");
 		
-		Patient user = Registry.patientFinder().find(id);
+		Patient user = Registry.patientFinder().findById(id);
 		
 		logger.info(user.toString());
 		

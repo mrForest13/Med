@@ -15,18 +15,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.app.model.user.Patient;
-import com.app.model.user.User;
 import com.app.model.user.finder.PatientFinder;
 import com.app.model.visit.Visit;
 import com.app.model.visit.VisitType;
 import com.app.model.visit.finder.VisitFinder;
-import com.app.path.PathVariable;
 import com.app.query.Criteria;
 import com.app.query.QueryObject;
 import com.app.registry.Registry;
 import com.app.transaction.TransactionScript;
 import com.app.transaction.service.CancelAppointmentForThePatient;
 import com.app.transaction.service.ConfirmAppointmentForThePatient;
+import com.app.transaction.user.BookAppointmentForThePatient;
+
 
 @Controller
 @RequestMapping("/service")
@@ -53,7 +53,7 @@ public class ServiceController {
 
 			Timestamp startSession = new Timestamp(Calendar.getInstance().getTime().getTime());
 
-			QueryObject query = new QueryObject(VisitFinder.TABLE);
+			QueryObject query = new QueryObject(VisitFinder.TABLENAME);
 			query.addCriteria(Criteria.greaterThan("visit_date_from", startSession));
 			query.addCriteria(Criteria.equalsLong("visit_user_pacjent_id", user.getId()));
 			query.addCriteria(Criteria.equalsString("visit_is_confirmed", "N"));
@@ -89,6 +89,19 @@ public class ServiceController {
 
 		transactionScript.run();
 
+		return "redirect:/service/patient";
+	}
+	
+	//DO ZROBIENIA
+	@RequestMapping(value = "/book/{id}", method = RequestMethod.GET)
+	public String bookAppointment(HttpServletRequest request, HttpServletResponse response,RedirectAttributes redirectAttributes) throws Exception {
+
+//		TransactionScript transactionScript = new BookAppointmentForThePatient(request, response);
+//
+//		transactionScript.run();
+
+		redirectAttributes.addAttribute("pesel", request.getAttribute("pesel"));
+		
 		return "redirect:/service/patient";
 	}
 

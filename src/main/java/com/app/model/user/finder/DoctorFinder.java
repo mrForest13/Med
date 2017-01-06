@@ -10,12 +10,13 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.app.dao.IFinderAll;
 import com.app.db.ConnectionOracle;
 import com.app.model.user.Doctor;
 import com.app.model.user.Patient;
 import com.app.model.user.User;
 
-public class DoctorFinder extends UserFinder implements IUserFinder<Doctor> {
+public class DoctorFinder extends UserFinder implements IFinderAll<Doctor> {
 
 	private static final Logger logger = LoggerFactory.getLogger(DoctorFinder.class);
 
@@ -24,7 +25,8 @@ public class DoctorFinder extends UserFinder implements IUserFinder<Doctor> {
 
 	private static final String getAll = "Select * from " + TABLENAME;
 
-	public Doctor find(Long id) {
+	@Override
+	public Doctor findById(Long id) {
 		return (Doctor) abstractFind(id, TABLENAME);
 	}
 
@@ -51,6 +53,7 @@ public class DoctorFinder extends UserFinder implements IUserFinder<Doctor> {
 
 	}
 
+	@Override
 	public List<Doctor> getAll() {
 
 		Connection con = null;

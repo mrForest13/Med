@@ -75,6 +75,7 @@ visit_type_referal_required VARCHAR(1) NOT NULL
 CREATE TABLE referal(
 referal_id NUMBER NOT NULL, PRIMARY KEY(referal_id),
 referal_user_pacjent_id NUMBER NOT NULL, FOREIGN KEY(referal_user_pacjent_id) REFERENCES uzytkownik(uzytkownik_uz_id),
+referal_user_doktor_id NUMBER NOT NULL, FOREIGN KEY(referal_user_doktor_id) REFERENCES uzytkownik(uzytkownik_uz_id),
 referal_visit_type_id NUMBER NOT NULL, FOREIGN KEY(referal_visit_type_id) REFERENCES visit_types(visit_type_id),
 referal_is_used VARCHAR(1) NOT NULL
 );

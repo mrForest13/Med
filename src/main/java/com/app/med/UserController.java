@@ -1,6 +1,7 @@
 package com.app.med;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,21 +11,18 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.app.model.medical.MedicalPrescription;
-import com.app.model.medical.Medicament;
-import com.app.model.medical.finder.MedicalPrescriptionFinder;
-import com.app.model.user.Doctor;
-import com.app.model.user.finder.DoctorFinder;
-import com.app.model.visit.VisitType;
-import com.app.model.visit.finder.VisitTypeFinder;
+import com.app.model.medical.Referal;
+import com.app.model.medical.finder.ReferalFinder;
+import com.app.query.Criteria;
+import com.app.query.QueryObject;
 import com.app.registry.Registry;
 import com.app.transaction.TransactionScript;
 import com.app.transaction.user.BookAppointmentForThePatient;
 import com.app.transaction.user.CancelAppointmentForThePatient;
 import com.app.transaction.user.GetFreeVisitForPatient;
 import com.app.transaction.user.GetMedicalPrescriptionForPatient;
+import com.app.transaction.user.GetReferalForPatient;
 import com.app.transaction.user.GetSearchOptionForVisit;
 import com.app.transaction.user.GetUserData;
 import com.app.transaction.user.GetVisitForPatient;
@@ -117,4 +115,15 @@ public class UserController {
 
 		return "prescriptions";
 	}
+
+	@RequestMapping(value = "/referal", method = RequestMethod.GET)
+	public String getReferals(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		TransactionScript transactionScript = new GetReferalForPatient(request, response);
+
+		transactionScript.run();
+
+		return "showreferal";
+	}
+
 }

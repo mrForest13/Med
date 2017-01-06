@@ -13,13 +13,14 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.app.dao.IUserFinder;
 import com.app.db.ConnectionOracle;
 import com.app.model.medical.MedicalPrescription;
 import com.app.model.medical.Medicament;
 import com.app.model.user.User;
 import com.app.registry.Registry;
 
-public class MedicalPrescriptionFinder {
+public class MedicalPrescriptionFinder implements IUserFinder<MedicalPrescription> {
 
 	private static final Logger logger = LoggerFactory.getLogger(MedicalPrescriptionFinder.class);
 	
@@ -27,6 +28,7 @@ public class MedicalPrescriptionFinder {
 	private static final String getMedicaments = "Select * from recepta_lek where recepta_id = ?";
 	private static final String getMedicament = "Select * from lek where lek_id = ?";
 	
+	@Override
 	public List<MedicalPrescription> findByUserId(Long Userid) {
 		
 		Connection con = null;
@@ -62,8 +64,8 @@ public class MedicalPrescriptionFinder {
 		
 		Long id = rs.getLong(1);
 		
-		User patient = Registry.patientFinder().find(rs.getLong(2));
-		User doctor = Registry.doctorFinder().find(rs.getLong(3));
+		User patient = Registry.patientFinder().findById(rs.getLong(2));
+		User doctor = Registry.doctorFinder().findById(rs.getLong(3));
 		Timestamp dateOfIssue = rs.getTimestamp(4);
 		boolean additionalRight = rs.getString(5).equals("Y") ? true : false;
 		

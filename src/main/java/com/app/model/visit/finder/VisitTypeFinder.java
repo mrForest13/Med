@@ -18,7 +18,7 @@ import com.app.model.user.finder.Finder;
 import com.app.model.visit.VisitType;
 
 public class VisitTypeFinder implements IFinder<VisitType> {
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(VisitTypeFinder.class);
 
 	private static final String byId = "Select * from VISIT_TYPES where visit_type_id = ?";
@@ -36,7 +36,7 @@ public class VisitTypeFinder implements IFinder<VisitType> {
 			ResultSet rs = st.executeQuery(getAll);
 
 			while (rs.next())
-				result.add(new VisitType(rs.getLong(1), rs.getString(2)));
+				result.add(new VisitType(rs.getLong(1), rs.getString(2), rs.getString(3).equals("Y") ? true : false));
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -47,14 +47,13 @@ public class VisitTypeFinder implements IFinder<VisitType> {
 				e.printStackTrace();
 			}
 		}
-		
+
 		return result;
 	}
 
-	
 	@Override
 	public VisitType findById(Long id) {
-		
+
 		Connection con = null;
 		VisitType result = null;
 		PreparedStatement findStatement = null;
@@ -65,9 +64,9 @@ public class VisitTypeFinder implements IFinder<VisitType> {
 			findStatement = con.prepareStatement(byId);
 			findStatement.setLong(1, id);
 			ResultSet rs = findStatement.executeQuery();
-			
-			if(rs.next()) {
-				result= new VisitType(rs.getLong(1), rs.getString(2));
+
+			if (rs.next()) {
+				result = new VisitType(rs.getLong(1), rs.getString(2), rs.getString(3).equals("Y") ? true : false);
 				logger.info(result.toString());
 			}
 
@@ -80,8 +79,8 @@ public class VisitTypeFinder implements IFinder<VisitType> {
 				e.printStackTrace();
 			}
 		}
-		
+
 		return result;
 	}
-	
+
 }

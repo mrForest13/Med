@@ -18,7 +18,7 @@ public class GetUserData extends TransactionScript {
 		
 		Long id = (Long) getRequest().getAttribute("userId");
 		
-		Patient patient = Registry.patientFinder().find(id);
+		Patient patient = Registry.patientFinder().findById(id);
 		
 		getRequest().setAttribute("user", patient);
 		

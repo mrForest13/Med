@@ -4,22 +4,20 @@ public class VisitType {
 
 	private String visitType;
 	private Long id;
+	private boolean referalRequired;
 
 	public String getVisitType() {
 		return visitType;
 	}
 
-	public void setVisitType(String visitType) {
-		this.visitType = visitType;
-	}
-
 	public VisitType() {
 	}
 
-	public VisitType(Long id ,String visitType) {
+	public VisitType(Long id ,String visitType, boolean referalRequired) {
 		super();
 		this.id = id;
 		this.visitType = visitType;
+		this.referalRequired = referalRequired;
 	}
 
 	@Override
@@ -33,6 +31,14 @@ public class VisitType {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public boolean isReferalRequired() {
+		return referalRequired;
+	}
+
+	public void setReferalRequired(boolean referalRequired) {
+		this.referalRequired = referalRequired;
 	}
 
 }

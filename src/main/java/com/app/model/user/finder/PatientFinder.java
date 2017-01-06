@@ -8,12 +8,12 @@ import java.sql.SQLException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.app.dao.IFinder;
 import com.app.db.ConnectionOracle;
-import com.app.model.user.Doctor;
 import com.app.model.user.Patient;
 import com.app.model.user.User;
 
-public class PatientFinder extends UserFinder implements IUserFinder<Patient> {
+public class PatientFinder extends UserFinder implements IFinder<Patient> {
 
 	private static final Logger logger = LoggerFactory.getLogger(PatientFinder.class);
 
@@ -21,7 +21,8 @@ public class PatientFinder extends UserFinder implements IUserFinder<Patient> {
 	public static final String TABLENAME = "Uzytkownik_Pacjent";
 	private static final String getByPesel = "Select * from Uzytkownik_pacjent where uzytkownik_pacjent_pesel = ?";
 
-	public Patient find(Long id) {
+	@Override
+	public Patient findById(Long id) {
 		return (Patient) abstractFind(id, TABLENAME);
 	}
 

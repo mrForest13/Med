@@ -211,11 +211,11 @@ select * from dual;
 
 --skierowania
 insert all into referal values
-(1,4,7,'N')
+(1,1,6,7,'N')
 into referal values
-(2,4,5,'N')
+(2,1,9,5,'N')
 into referal values
-(3,3,5,'N')
+(3,3,7,5,'N')
 into referal values
-(4,3,7,'N')
+(4,3,8,7,'N')
 select * from dual;

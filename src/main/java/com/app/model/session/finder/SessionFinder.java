@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.app.dao.IFinder;
+import com.app.dao.IFinderAll;
 import com.app.db.ConnectionOracle;
 import com.app.med.HomeController;
 import com.app.model.session.Session;
@@ -20,7 +21,7 @@ import com.app.model.user.finder.UserFinder;
 import com.app.model.visit.VisitType;
 import com.app.registry.Registry;
 
-public class SessionFinder implements IFinder<Session> {
+public class SessionFinder implements IFinderAll<Session> {
 
 	private static final Logger logger = LoggerFactory.getLogger(SessionFinder.class);
 
@@ -61,6 +62,7 @@ public class SessionFinder implements IFinder<Session> {
 		return result;
 	}
 
+	@Override
 	public List<Session> getAll() {
 
 		Connection con = null;

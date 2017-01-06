@@ -13,7 +13,7 @@
 			<li><a href="${contextPath}/user/search">Umow wizyte / badanie</a></li>
 			<li><a href="${contextPath}/user/myvisit">Moje wizyty</a></li>
 			<li><a href="#">Wyniki badan</a></li>
-			<li><a href="#">Skierowania</a></li>
+			<li><a href="${contextPath}/user/referal">Skierowania</a></li>
 			<li><a href="${contextPath}/user/prescriptions">Recepty</a></li>
 			<li><a href="${contextPath}/user/mypage">Moje dane</a></li>
 		</ul>

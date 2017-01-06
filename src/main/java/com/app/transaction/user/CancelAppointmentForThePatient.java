@@ -16,7 +16,6 @@ import com.app.transaction.TransactionScript;
 public class CancelAppointmentForThePatient extends TransactionScript {
 
 	private static final Logger logger = LoggerFactory.getLogger(CancelAppointmentForThePatient.class);
-	private RedirectAttributes redirectAttributes;
 	
 	public CancelAppointmentForThePatient(HttpServletRequest request, HttpServletResponse response) {
 		super(request, response);

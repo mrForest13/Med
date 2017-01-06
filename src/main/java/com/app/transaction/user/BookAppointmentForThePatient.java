@@ -29,7 +29,7 @@ public class BookAppointmentForThePatient extends TransactionScript{
 		
 		Long userId = (Long) getRequest().getAttribute("userId");
 		
-		User user = Registry.patientFinder().find(userId);
+		User user = Registry.patientFinder().findById(userId);
 		
 		visit.setPatient(user);
 		
