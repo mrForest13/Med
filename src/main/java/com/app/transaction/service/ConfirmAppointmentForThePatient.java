@@ -31,13 +31,13 @@ public class ConfirmAppointmentForThePatient extends TransactionScript {
 
 		Visit visit = Registry.visitFinder().findById(id);
 
-		redirectAttributes.addAttribute("pesel", ((Patient)visit.getPatient()).getPesel());
-
 		visit.setVisistConfirmed(true);
 
 		logger.info(visit.toString());
 
 		visit.update();
+		
+		redirectAttributes.addAttribute("pesel", getRequest().getParameter("pesel"));
 
 	}
 

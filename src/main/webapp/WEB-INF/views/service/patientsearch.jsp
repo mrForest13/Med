@@ -38,22 +38,24 @@
 					${visit.getDoctor().lastName}</td>
 				<td>${visit.getVisitType().visitType}</td>
 				<td><a class="btn btn-primary"
-					href="${contextPath}/med-1/service/cancel/${visit.getId()}">anuluj</a></td>
+					href="${contextPath}/med-1/service/cancel/${visit.getId()}?pesel=${pesel}">anuluj</a></td>
 				<td><a class="btn btn-primary"
-					href="${contextPath}/med-1/service/confirm/${visit.getId()}">potwierdz</a></td>
+					href="${contextPath}/med-1/service/confirm/${visit.getId()}?pesel=${pesel}">potwierdz</a></td>
 			</tr>
 		</c:forEach>
 	</table>
 
 	<c:if test="${not empty pesel}">
 
-		<br/><br/><br/>
-	
+		<br />
+		<br />
+		<br />
+
 		<div class="row">
 			<div class="col-md-8 col-md-offset-2">
 
 				<form class="form-inline" method="POST"
-					action="${contextPath}/med-1/user/visit">
+					action="${contextPath}/med-1/service/patient?pesel=${pesel}">
 					<div class="form-group">
 						<select class="form-control" name="visitType" id="sel1">
 							<option value="" selected>-- Rodzaj Wizyty Lub Badania
@@ -79,7 +81,7 @@
 			</div>
 		</div>
 
-		<table class="table table-striped">
+		<table id="example" class="table table-striped">
 			<caption>Wolne terminy</caption>
 			<tr>
 				<th>Data wizyty</th>
@@ -88,7 +90,7 @@
 				<th></th>
 			</tr>
 
-			<c:forEach var="visit" items="${visitList}">
+			<c:forEach var="visit" items="${visitListR}">
 				<tr>
 					<td>${visit.visitDateFrom}</td>
 					<td>${visit.getDoctor().firstName}

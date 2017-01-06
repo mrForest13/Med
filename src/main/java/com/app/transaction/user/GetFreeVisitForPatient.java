@@ -67,39 +67,12 @@ public class GetFreeVisitForPatient extends TransactionScript {
 			visitsList = visitsList.stream().filter(e -> e.getVisitType().getVisitType().equals(visitType))
 					.collect(Collectors.toList());
 		
-		visitsList = checkUserReferal(visitsList);
+		Long id = (Long) getRequest().getAttribute("userId");
+		
+		visitsList = checkUserReferal(visitsList, id);
 
 		getRequest().setAttribute("visitList", visitsList);
 
 	}
 
-	private List<Visit> checkUserReferal(List<Visit> visitList) {
-
-		Long id = (Long) getRequest().getAttribute("userId");
-
-		QueryObject queryReferal = new QueryObject(ReferalFinder.TABLENAME);
-		queryReferal.addCriteria(Criteria.equalsLong("REFERAL_USER_PACJENT_ID", id));
-		queryReferal.addCriteria(Criteria.equalsString("REFERAL_IS_USED", "N"));
-
-		List<Referal> referalList = Registry.referalFinder().findByQueryObject(queryReferal);
-		
-		logger.info(referalList.toString());
-
-		List<Visit> results = new ArrayList<Visit>();
-
-		for (Visit v : visitList) {
-			if (!v.getVisitType().isReferalRequired())
-				results.add(v);
-			else {
-				
-				Referal r = new Referal();
-				r.setVisitType(v.getVisitType());
-				
-				if (referalList.contains(r))
-					results.add(v);
-			}
-		}
-
-		return results;
-	}
 }
