@@ -81,31 +81,31 @@
 	<definition name="doktorpatientsearch" extends="base.definition">
 		<put-attribute name="title" value="Wyszukaj" />
 		<put-attribute name="body"
-			value="/WEB-INF/views/doktor/doktorpatientsearch.jsp" />
+			value="/WEB-INF/views/doctor/doktorpatientsearch.jsp" />
 	</definition>	
 	
 	<definition name="doktorprescriptions" extends="base.definition">
 		<put-attribute name="title" value="Recepty" />
 		<put-attribute name="body"
-			value="/WEB-INF/views/doktor/doktorprescriptions.jsp" />
+			value="/WEB-INF/views/doctor/doktorprescriptions.jsp" />
 	</definition>	
 
 	<definition name="doktorshowreferal" extends="base.definition">
 		<put-attribute name="title" value="doktor" />
 		<put-attribute name="body"
-			value="/WEB-INF/views/doktor/doktorshowreferal.jsp" />
+			value="/WEB-INF/views/doctor/doktorshowreferal.jsp" />
 	</definition>	
 	
 	<definition name="doktornote" extends="base.definition">
 		<put-attribute name="title" value="doktor" />
 		<put-attribute name="body"
-			value="/WEB-INF/views/doktor/doktornote.jsp" />
+			value="/WEB-INF/views/doctor/doktornote.jsp" />
 	</definition>	
 	
 	<definition name="doktorexamination" extends="base.definition">
 		<put-attribute name="title" value="Badania" />
 		<put-attribute name="body"
-			value="/WEB-INF/views/doktor/doktorexamination.jsp" />
+			value="/WEB-INF/views/doctor/doktorexamination.jsp" />
 	</definition>	
 	
 		<definition name="userexamination" extends="base.definition">
