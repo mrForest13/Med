@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
-import oracle.net.aso.f;
 
 public abstract class Criteria {
 

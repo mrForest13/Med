@@ -31,7 +31,7 @@ public class VisitTypeFinder implements IFinder<VisitType> {
 
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "root", "root");
+			con = ConnectionOracle.getInstance();
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery(getAll);
 
@@ -60,7 +60,7 @@ public class VisitTypeFinder implements IFinder<VisitType> {
 
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "root", "root");
+			con = ConnectionOracle.getInstance();
 			findStatement = con.prepareStatement(byId);
 			findStatement.setLong(1, id);
 			ResultSet rs = findStatement.executeQuery();
