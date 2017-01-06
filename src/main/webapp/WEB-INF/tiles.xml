@@ -13,7 +13,7 @@
 		<put-attribute name="homemenu"
 			value="/WEB-INF/views/template/homemenu.jsp" />
 		<put-attribute name="doktormenu"
-			value="/WEB-INF/views/template/doktormenumenu.jsp" />
+			value="/WEB-INF/views/template/doktormenu.jsp" />
 		<put-attribute name="homemenu"
 			value="/WEB-INF/views/template/labmenu.jsp" />
 		<put-attribute name="body" value="" />
