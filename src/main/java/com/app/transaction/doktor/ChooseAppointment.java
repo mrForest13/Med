@@ -34,8 +34,6 @@ public class ChooseAppointment extends TransactionScript {
 
 		redirectAttributes.addAttribute("pesel", ((Patient)visit.getPatient()).getPesel());
 
-		visit.setVisitChoosed(true);
-
 		logger.info(visit.toString());
 
 		visit.update();

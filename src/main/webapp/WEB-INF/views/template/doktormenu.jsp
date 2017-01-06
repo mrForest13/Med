@@ -11,10 +11,10 @@
 		</div>
 		<ul class="nav navbar-nav">
 			<li><a href="${contextPath}/doktor/search">Pokaz Pacjenta</a></li>
-			<li><a href="#">Wyniki badan</a></li>
+			<li><a href="${contextPath}/doktor/examination">Badania</a></li>
 			<li><a href="${contextPath}/doktor/referal">Skierowania</a></li>
 			<li><a href="${contextPath}/doktor/prescriptions">Recepty</a></li>
-			<li><a href="${contextPath}/doktor/mypage">Notatka z wizyty</a></li>
+			<li><a href="${contextPath}/doktor/note">Notatka z wizyty</a></li>
 		</ul>
 		<a class="btn btn-danger navbar-btn" href="${contextPath}/logout">Wyloguj</a>
 	</div>
