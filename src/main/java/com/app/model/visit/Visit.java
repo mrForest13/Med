@@ -22,7 +22,7 @@ public class Visit {
 	private Timestamp visitDateTo;
 	private Money visitPrice;
 	private boolean visistConfirmed;
-	private boolean visitChoosen;
+	private boolean visitChoosed;
 
 	public Long getId() {
 		return id;
@@ -81,11 +81,11 @@ public class Visit {
 	}
 	
 	public boolean isVisitChoosed(){
-		return visitChoosen;
+		return visitChoosed;
 	}
 	
 	public void setVisitChoosed(boolean visitChoosed){
-		this.visitChoosen = visitChoosed;
+		this.visitChoosed = visitChoosed;
 	}
 
 	public Visit(Long id, User patient, User doctor, VisitType visitType, Timestamp visitDateFrom,
@@ -99,7 +99,7 @@ public class Visit {
 		this.visitDateTo = visitDateTo;
 		this.visitPrice = visitPrice;
 		this.visistConfirmed = visistConfirmed;
-		this.visitChoosen = false;
+		this.visitChoosed = false;
 	}
 
 	@Override
