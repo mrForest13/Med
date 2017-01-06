@@ -27,9 +27,9 @@ public abstract class SessionFilter {
 		case "user":
 			return 0L;
 		case "doctor":
-			return 2L;
+			return 1L;
 		case "lab":
-			return 0L;
+			return 4L;
 		case "service":
 			return 3L;
 		default:
