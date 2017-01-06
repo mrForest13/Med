@@ -28,11 +28,10 @@ import com.app.transaction.service.CancelAppointmentForThePatient;
 import com.app.transaction.service.ConfirmAppointmentForThePatient;
 import com.app.transaction.doktor.ChooseAppointment;
 
-public class DoktorController {
 
 @Controller
 @RequestMapping("/doktor")
-public class ServiceController {
+public class DoktorController {
 
 	private static final Logger logger = LoggerFactory.getLogger(DoktorController.class);
 
@@ -82,7 +81,5 @@ public class ServiceController {
 
 		return "doktorpatientsearch";
 	}
-
-}
 
 }
