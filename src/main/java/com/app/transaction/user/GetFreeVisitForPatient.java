@@ -2,9 +2,11 @@ package com.app.transaction.user;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.app.model.medical.Referal;
+import com.app.model.medical.finder.ReferalFinder;
 import com.app.model.visit.Visit;
 import com.app.model.visit.VisitType;
 import com.app.model.visit.finder.VisitFinder;
@@ -62,9 +66,36 @@ public class GetFreeVisitForPatient extends TransactionScript {
 		if (!visitType.isEmpty())
 			visitsList = visitsList.stream().filter(e -> e.getVisitType().getVisitType().equals(visitType))
 					.collect(Collectors.toList());
+		
+		visitsList = checkUserReferal(visitsList);
 
 		getRequest().setAttribute("visitList", visitsList);
 
 	}
 
+	private List<Visit> checkUserReferal(List<Visit> visitList) {
+
+		Long id = (Long) getRequest().getAttribute("userId");
+
+		QueryObject queryReferal = new QueryObject(ReferalFinder.TABLENAME);
+		queryReferal.addCriteria(Criteria.equalsLong("REFERAL_USER_PACJENT_ID", id));
+		queryReferal.addCriteria(Criteria.equalsString("VISIT_TYPE_REFERAL_REQUIRED", "N"));
+
+		List<Referal> referalList = Registry.referalFinder().findByQueryObject(queryReferal);
+
+		Set<Referal> referalSet = new HashSet<Referal>(referalList);
+
+		List<Visit> results = new ArrayList<Visit>();
+
+		for (Visit v : visitList) {
+			if (!v.getVisitType().isReferalRequired())
+				results.add(v);
+			else {
+				if (referalSet.contains(v.getVisitType()))
+					results.add(v);
+			}
+		}
+
+		return results;
+	}
 }

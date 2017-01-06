@@ -40,5 +40,10 @@ public class VisitType {
 	public void setReferalRequired(boolean referalRequired) {
 		this.referalRequired = referalRequired;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		return ((VisitType)obj).visitType.equals(this.visitType);
+	}
 
 }

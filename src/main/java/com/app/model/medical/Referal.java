@@ -72,5 +72,10 @@ public class Referal {
 		return "Referal [id=" + id + ", patient=" + patient + ", doctor=" + doctor + ", visitType=" + visitType
 				+ ", used=" + used + "]";
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		return ((Referal)obj).getVisitType().equals(this.getVisitType());
+	}
 
 }

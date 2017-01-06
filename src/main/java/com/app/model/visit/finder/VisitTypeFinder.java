@@ -27,13 +27,14 @@ public class VisitTypeFinder implements IFinder<VisitType> {
 	public List<VisitType> getAll() {
 
 		Connection con = null;
+		Statement st = null;
+		ResultSet rs = null;
 		List<VisitType> result = new ArrayList<VisitType>();
 
 		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
 			con = ConnectionOracle.getInstance();
-			Statement st = con.createStatement();
-			ResultSet rs = st.executeQuery(getAll);
+			st = con.createStatement();
+			rs = st.executeQuery(getAll);
 
 			while (rs.next())
 				result.add(new VisitType(rs.getLong(1), rs.getString(2), rs.getString(3).equals("Y") ? true : false));
@@ -42,7 +43,8 @@ public class VisitTypeFinder implements IFinder<VisitType> {
 			e.printStackTrace();
 		} finally {
 			try {
-				con.close();
+				st.close();
+				rs.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -57,13 +59,13 @@ public class VisitTypeFinder implements IFinder<VisitType> {
 		Connection con = null;
 		VisitType result = null;
 		PreparedStatement findStatement = null;
+		ResultSet rs = null;
 
 		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
 			con = ConnectionOracle.getInstance();
 			findStatement = con.prepareStatement(byId);
 			findStatement.setLong(1, id);
-			ResultSet rs = findStatement.executeQuery();
+			rs = findStatement.executeQuery();
 
 			if (rs.next()) {
 				result = new VisitType(rs.getLong(1), rs.getString(2), rs.getString(3).equals("Y") ? true : false);
@@ -74,7 +76,8 @@ public class VisitTypeFinder implements IFinder<VisitType> {
 			e.printStackTrace();
 		} finally {
 			try {
-				con.close();
+				findStatement.close();
+				rs.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

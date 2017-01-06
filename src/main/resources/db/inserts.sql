@@ -144,9 +144,9 @@ select * from dual;
 
 --wizyty
 insert all into visit values
-(1,7,3,'',TO_DATE('2017-01-02 15:30','YYYY-MM-DD HH24:MI'),TO_DATE('2017-01-02 16:30','YYYY-MM-DD HH24:MI'),0,'N')
+(1,7,5,'',TO_DATE('2017-01-02 15:30','YYYY-MM-DD HH24:MI'),TO_DATE('2017-01-02 16:30','YYYY-MM-DD HH24:MI'),0,'N')
 into visit values
-(2,7,3,1,TO_DATE('2017-01-08 16:30','YYYY-MM-DD HH24:MI'),TO_DATE('2017-01-08 17:00','YYYY-MM-DD HH24:MI'),100,'N')
+(2,7,5,1,TO_DATE('2017-01-08 16:30','YYYY-MM-DD HH24:MI'),TO_DATE('2017-01-08 17:00','YYYY-MM-DD HH24:MI'),100,'N')
 into visit values
 (3,8,2,'',TO_DATE('2017-01-09 16:30','YYYY-MM-DD HH24:MI'),TO_DATE('2017-01-09 17:00','YYYY-MM-DD HH24:MI'),100,'N')
 into visit values
@@ -168,13 +168,13 @@ into visit values
 into visit values
 (12,7,3,'',TO_DATE('2017-01-07 16:30','YYYY-MM-DD HH24:MI'),TO_DATE('2017-01-07 17:00','YYYY-MM-DD HH24:MI'),100,'N')
 into visit values --LABORATORIUM
-(13,7,3,'',TO_DATE('2017-02-07 16:30','YYYY-MM-DD HH24:MI'),TO_DATE('2017-02-07 17:00','YYYY-MM-DD HH24:MI'),0,'N')
+(13,7,7,'',TO_DATE('2017-02-07 16:30','YYYY-MM-DD HH24:MI'),TO_DATE('2017-02-07 17:00','YYYY-MM-DD HH24:MI'),0,'N')
 into visit values
 (14,7,3,'',TO_DATE('2017-03-07 16:30','YYYY-MM-DD HH24:MI'),TO_DATE('2017-03-07 17:00','YYYY-MM-DD HH24:MI'),0,'N')
 into visit values
-(15,7,3,'',TO_DATE('2017-04-07 16:30','YYYY-MM-DD HH24:MI'),TO_DATE('2017-04-07 17:00','YYYY-MM-DD HH24:MI'),0,'N')
+(15,7,7,'',TO_DATE('2017-04-07 16:30','YYYY-MM-DD HH24:MI'),TO_DATE('2017-04-07 17:00','YYYY-MM-DD HH24:MI'),0,'N')
 into visit values
-(16,7,3,'',TO_DATE('2017-05-07 16:30','YYYY-MM-DD HH24:MI'),TO_DATE('2017-05-07 17:00','YYYY-MM-DD HH24:MI'),0,'N')
+(16,7,7,'',TO_DATE('2017-05-07 16:30','YYYY-MM-DD HH24:MI'),TO_DATE('2017-05-07 17:00','YYYY-MM-DD HH24:MI'),0,'N')
 select * from dual;
 
 --badania lab
@@ -213,7 +213,7 @@ select * from dual;
 insert all into referal values
 (1,1,6,7,'N')
 into referal values
-(2,1,9,5,'N')
+(2,2,9,5,'N')
 into referal values
 (3,3,7,5,'N')
 into referal values
