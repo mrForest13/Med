@@ -7,7 +7,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.taglibs.standard.tag.common.core.ChooseTag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -25,6 +24,8 @@ import com.app.query.QueryObject;
 import com.app.registry.Registry;
 import com.app.transaction.TransactionScript;
 import com.app.transaction.doktor.ChooseAppointment;
+import com.app.transaction.user.GetMedicalPrescriptionForPatient;
+import com.app.transaction.user.GetReferalForPatient;
 
 
 @Controller
@@ -78,6 +79,48 @@ public class DoktorController {
 		}
 
 		return "doktorpatientsearch";
+	}
+	
+	@RequestMapping(value = "/prescriptions", method = RequestMethod.GET)
+	public String getMedicalPrescription(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		TransactionScript transactionScript = new GetMedicalPrescriptionForPatient(request, response);
+
+		transactionScript.run();
+
+		return "doktorprescriptions";
+	}
+	
+	@RequestMapping(value = "/referal", method = RequestMethod.GET)
+	public String getReferals(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		TransactionScript transactionScript = new GetReferalForPatient(request, response);
+
+		transactionScript.run();
+
+		return "doktorshowreferal";
+	}
+
+	
+	@RequestMapping(value = "/note", method = RequestMethod.GET)
+	public String getNotes(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		TransactionScript transactionScript = new GetReferalForPatient(request, response);
+
+		transactionScript.run();
+
+		return "doktornote";
+	}
+
+	
+	@RequestMapping(value = "/examination", method = RequestMethod.GET)
+	public String getExaminations(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		TransactionScript transactionScript = new GetReferalForPatient(request, response);
+
+		transactionScript.run();
+
+		return "doktorexamination";
 	}
 
 }
