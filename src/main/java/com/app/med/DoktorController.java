@@ -24,8 +24,6 @@ import com.app.query.Criteria;
 import com.app.query.QueryObject;
 import com.app.registry.Registry;
 import com.app.transaction.TransactionScript;
-import com.app.transaction.service.CancelAppointmentForThePatient;
-import com.app.transaction.service.ConfirmAppointmentForThePatient;
 import com.app.transaction.doktor.ChooseAppointment;
 
 
