@@ -89,13 +89,15 @@ visit_user_pacjent_id NUMBER, FOREIGN KEY (visit_user_pacjent_id) REFERENCES uzy
 visit_date_from DATE,
 visit_date_to DATE,
 visit_price NUMBER,
-visit_is_confirmed VARCHAR(1)
+visit_is_confirmed VARCHAR(1),
+visit_note VARCHAR(2000)
 );
 --wyniki badan
 CREATE TABLE lab(
 lab_id NUMBER NOT NULL, PRIMARY KEY(lab_id),
 lab_visit_id NUMBER NOT NULL, FOREIGN KEY (lab_visit_id) REFERENCES visit(visit_id),
-lab_file BLOB --zapisywanie wygenerowanego pdfa?
+lab_file BLOB, --zapisywanie wygenerowanego pdfa?
+lab_is_added VARCHAR(1)
 );
 
 CREATE TABLE sample(
