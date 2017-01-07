@@ -73,6 +73,12 @@ package com.app.transaction;
 	    return new Money( amount, this.currency );
 	  }
 	  
+	  public Money(double amount, String currCode) {
+		  BigDecimal amountbd = new BigDecimal(amount);
+		  this.amount = amountbd;
+		  this.currency= Currency.getInstance(currCode);
+	  }
+	  
 	 public String toFormattedString() {
 	  NumberFormat nf = NumberFormat.getCurrencyInstance();
 	  nf.setCurrency( currency );
