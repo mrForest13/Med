@@ -77,7 +77,7 @@ public class HomeController {
 			return "redirect:/login";
 		}
 
-		return "redirect:/result";
+		return "redirect:/home";
 	}
 	
 	@RequestMapping(value = "/noacces", method = RequestMethod.GET)
@@ -86,10 +86,10 @@ public class HomeController {
 		return "noacces";
 	}
 	
-	@RequestMapping(value = "/alreadylogged", method = RequestMethod.GET)
+	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String alreadyLogged(HttpServletRequest request, HttpServletResponse response) {
 		
-		return "alreadylogged";
+		return "home";
 	}
 	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
@@ -109,10 +109,4 @@ public class HomeController {
 		return "redirect:/login";
 	}
 	
-	@RequestMapping(value = "/result", method = RequestMethod.GET)
-	public String getresult(HttpServletRequest request, HttpServletResponse response) {
-		
-		return "result";
-	}
-
 }

@@ -110,6 +110,9 @@ sample_standard_negative VARCHAR(10),
 sample_unit VARCHAR(20) NOT NULL,
 sample_description VARCHAR(500));
 
+CREATE SEQUENCE SAMPLE_SEQ
+   START WITH 10;
+
 CREATE TABLE uzytkownik_session(
 session_id NUMBER NOT NULL, PRIMARY KEY(session_id),
 session_uzytkownik_uz_id NUMBER NOT NULL, FOREIGN KEY (session_uzytkownik_uz_id) REFERENCES uzytkownik(uzytkownik_uz_id),
@@ -141,4 +144,5 @@ drop table uzytkownik;
 DROP SEQUENCE UZYTKOWNIK_SEQ;
 DROP SEQUENCE UZYTKOWNIK_P_SEQ;
 DROP SEQUENCE SESSION_SEQ;
+DROP SEQUENCE SAMPLE_SEQ;
 */

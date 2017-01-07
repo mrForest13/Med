@@ -57,7 +57,7 @@ public class HomeSessionFilter extends SessionFilter implements Filter {
 			
 			logger.info(session.toString());
 
-			httpServletResponse.sendRedirect("/med-1/alreadylogged");
+			httpServletResponse.sendRedirect("/med-1/home");
 			return;
 		}
 		

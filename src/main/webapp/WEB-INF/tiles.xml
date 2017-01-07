@@ -46,9 +46,9 @@
 		<put-attribute name="body" value="/WEB-INF/views/result.jsp" />
 	</definition>
 
-	<definition name="alreadylogged" extends="base.definition">
+	<definition name="home" extends="base.definition">
 		<put-attribute name="title" value="Zalogowany" />
-		<put-attribute name="body" value="/WEB-INF/views/alreadylogged.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/home.jsp" />
 	</definition>
 
 	<definition name="noacces" extends="base.definition">

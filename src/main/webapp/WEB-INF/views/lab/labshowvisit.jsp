@@ -28,7 +28,6 @@
 			<th>Lekarz</th>
 			<th>Rodzaj</th>
 			<th></th>
-			<th></th>
 		</tr>
 
 		<c:forEach var="lab" items="${labList}">

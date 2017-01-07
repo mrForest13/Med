@@ -13,15 +13,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.app.model.lab.Lab;
 import com.app.model.lab.Sample;
-import com.app.model.user.Patient;
-import com.app.model.user.finder.PatientFinder;
-import com.app.model.visit.Visit;
-import com.app.model.visit.VisitType;
 import com.app.path.PathVariable;
 import com.app.registry.Registry;
 import com.app.transaction.TransactionScript;
+import com.app.transaction.lab.AddSampleToLAbForPatient;
+import com.app.transaction.lab.ConfirmLabForPatient;
 import com.app.transaction.lab.GetLabVisitForPatient;
-import com.app.transaction.user.GetUserData;
+import com.app.transaction.lab.ShowAddSampleForm;
 
 @Controller
 @RequestMapping("/lab")
@@ -46,21 +44,36 @@ public class LabController {
 	}
 
 	@RequestMapping(value = "/patient/{id}", method = RequestMethod.GET)
-	public String addSample(HttpServletRequest request, HttpServletResponse response) {
+	public String addSampleForm(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		TransactionScript transactionScript = new ShowAddSampleForm(request, response);
+
+		transactionScript.run();
+		
+		return "addsample";
+	}
+	
+
+	@RequestMapping(value = "/patient/{id}", method = RequestMethod.POST)
+	public String addSample(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		Long labId = PathVariable.getIdFromUrl(request.getRequestURL().toString());
 		
-		Lab lab = Registry.labFinder().findById(labId);
+		TransactionScript transactionScript = new AddSampleToLAbForPatient(request, response);
+
+		transactionScript.run();
 		
-		Sample sample = new Sample();
-		
-		request.setAttribute("sample", sample);
-		
-		List<Sample> sampleList = lab.getSample();
-		
-		request.setAttribute("sampleList", sampleList);
-		
-		return "addsample";
+		return "redirect:/lab/patient/"+labId;
+	}
+	
+	@RequestMapping(value = "/patient/confirm/{id}", method = RequestMethod.GET)
+	public String confirmLab(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		TransactionScript transactionScript = new ConfirmLabForPatient(request, response);
+
+		transactionScript.run();
+
+		return "redirect:/lab/search";
 	}
 
 }
