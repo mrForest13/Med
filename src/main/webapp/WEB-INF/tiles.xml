@@ -10,9 +10,9 @@
 			value="/WEB-INF/views/template/usermenu.jsp" />
 		<put-attribute name="servicemenu"
 			value="/WEB-INF/views/template/servicemenu.jsp" />
-					<put-attribute name="doktormenu"
+		<put-attribute name="doktormenu"
 			value="/WEB-INF/views/template/doktormenu.jsp" />
-		<put-attribute name="homemenu"
+		<put-attribute name="labmenu"
 			value="/WEB-INF/views/template/labmenu.jsp" />
 		<put-attribute name="homemenu"
 			value="/WEB-INF/views/template/homemenu.jsp" />
