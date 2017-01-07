@@ -88,7 +88,8 @@ visit_visit_types_id NUMBER NOT NULL, FOREIGN KEY (visit_visit_types_id) REFEREN
 visit_user_pacjent_id NUMBER, FOREIGN KEY (visit_user_pacjent_id) REFERENCES uzytkownik(uzytkownik_uz_id),
 visit_date_from DATE,
 visit_date_to DATE,
-visit_price NUMBER,
+visit_price_amount NUMBER,
+visit_price_currency VARCHAR(3),
 visit_is_confirmed VARCHAR(1),
 visit_note VARCHAR(2000)
 );
