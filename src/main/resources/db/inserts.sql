@@ -162,30 +162,30 @@ into visit values
 into visit values
 (9,7,3,1,TO_DATE('2017-01-05 13:30','YYYY-MM-DD HH24:MI'),TO_DATE('2017-01-05 14:00','YYYY-MM-DD HH24:MI'),100,'Y','')
 into visit values
-(10,8,2,'',TO_DATE('2017-01-17 16:30','YYYY-MM-DD HH24:MI'),TO_DATE('2017-01-17 17:00','YYYY-MM-DD HH24:MI'),100,'N','')
+(10,8,7,'',TO_DATE('2017-01-17 16:30','YYYY-MM-DD HH24:MI'),TO_DATE('2017-01-17 17:00','YYYY-MM-DD HH24:MI'),100,'N','')
 into visit values
-(11,7,3,1,TO_DATE('2017-01-02 15:30','YYYY-MM-DD HH24:MI'),TO_DATE('2016-01-02 16:30','YYYY-MM-DD HH24:MI'),0,'Y','')
+(11,7,7,1,TO_DATE('2017-01-02 15:30','YYYY-MM-DD HH24:MI'),TO_DATE('2016-01-02 16:30','YYYY-MM-DD HH24:MI'),0,'Y','')
 into visit values
 (12,7,3,'',TO_DATE('2017-01-17 16:30','YYYY-MM-DD HH24:MI'),TO_DATE('2017-01-17 17:00','YYYY-MM-DD HH24:MI'),100,'N','')
 into visit values --LABORATORIUM
-(13,7,7,'',TO_DATE('2017-02-07 16:30','YYYY-MM-DD HH24:MI'),TO_DATE('2017-02-07 17:00','YYYY-MM-DD HH24:MI'),0,'N','')
+(13,7,6,1,TO_DATE('2017-01-06 16:30','YYYY-MM-DD HH24:MI'),TO_DATE('2017-01-06 17:00','YYYY-MM-DD HH24:MI'),0,'Y','')
 into visit values
-(14,7,3,'',TO_DATE('2017-03-07 16:30','YYYY-MM-DD HH24:MI'),TO_DATE('2017-03-07 17:00','YYYY-MM-DD HH24:MI'),0,'N','')
+(14,7,6,1,TO_DATE('2017-01-05 16:30','YYYY-MM-DD HH24:MI'),TO_DATE('2017-01-05 17:00','YYYY-MM-DD HH24:MI'),0,'Y','')
 into visit values
-(15,7,7,'',TO_DATE('2017-04-07 16:30','YYYY-MM-DD HH24:MI'),TO_DATE('2017-04-07 17:00','YYYY-MM-DD HH24:MI'),0,'N','')
+(15,7,6,1,TO_DATE('2017-01-03 16:30','YYYY-MM-DD HH24:MI'),TO_DATE('2017-01-03 17:00','YYYY-MM-DD HH24:MI'),0,'Y','')
 into visit values
-(16,7,7,'',TO_DATE('2017-05-07 16:30','YYYY-MM-DD HH24:MI'),TO_DATE('2017-05-07 17:00','YYYY-MM-DD HH24:MI'),0,'N','')
+(16,7,6,1,TO_DATE('2017-01-06 16:30','YYYY-MM-DD HH24:MI'),TO_DATE('2017-01-06 17:00','YYYY-MM-DD HH24:MI'),0,'Y','')
 select * from dual;
 
 --badania lab
 insert all into lab values
-(1,13,'','N')
+(1,13,'','Y')
 into lab values
-(2,14,'','N')
+(2,14,'','Y')
 into lab values
 (3,15,'','N')
 into lab values
-(4,16,'','N')
+(4,16,'','Y')
 select * from dual;
 
 --poszczegolne wyniki
@@ -200,7 +200,7 @@ into sample values
 into sample values
 (5,2,'Testosteron','100','50','200','RO / ML','wynik do konsultacji')
 into sample values
-(6,3,'Progesteron','10','2','80','RO / ML','')
+(6,1,'Progesteron','10','2','80','RO / ML','')
 into sample values
 (7,4,'Igg','50','40','70','RO / ML','')
 into sample values

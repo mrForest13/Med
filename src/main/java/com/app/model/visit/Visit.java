@@ -78,7 +78,9 @@ public class Visit {
 	public void setVisistConfirmed(boolean visistConfirmed) {
 		this.visistConfirmed = visistConfirmed;
 	}
-	
+
+	public Visit() {
+	}
 
 	public Visit(Long id, User patient, User doctor, VisitType visitType, Timestamp visitDateFrom,
 			Timestamp visitDateTo, Money visitPrice, boolean visistConfirmed) {
@@ -117,12 +119,12 @@ public class Visit {
 			con = ConnectionOracle.getInstance();
 
 			insertStatement = con.prepareStatement(updateStatementString);
-			
+
 			if (getPatient() == null)
 				insertStatement.setNull(1, Types.NULL);
 			else
 				insertStatement.setLong(1, getPatient().getId());
-			
+
 			insertStatement.setString(2, isVisistConfirmed() ? "Y" : "N");
 			insertStatement.setLong(3, getId());
 			insertStatement.executeUpdate();

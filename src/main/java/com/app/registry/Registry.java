@@ -4,6 +4,8 @@ import com.app.dao.IFinder;
 import com.app.dao.IFinderAll;
 import com.app.dao.IQueryFinder;
 import com.app.dao.IUserFinder;
+import com.app.model.lab.Lab;
+import com.app.model.lab.finder.LabFinder;
 import com.app.model.medical.MedicalPrescription;
 import com.app.model.medical.Referal;
 import com.app.model.medical.finder.MedicalPrescriptionFinder;
@@ -32,6 +34,7 @@ public class Registry {
 	private IFinderAll<Session> sessionFinder = new SessionFinder();
 	private IUserFinder<MedicalPrescription> medicalPrescriptionFinder = new MedicalPrescriptionFinder();
 	private IQueryFinder<Referal> referalFinder = new ReferalFinder();
+	private IUserFinder<Lab> labFinder = new LabFinder();
 
 	private Registry() {}
 	
@@ -69,5 +72,9 @@ public class Registry {
 	
 	public static IQueryFinder<Referal> referalFinder() {
 		return getInstance().referalFinder;
+	}
+	
+	public static IUserFinder<Lab> labFinder() {
+		return getInstance().labFinder;
 	}
 }

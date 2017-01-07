@@ -81,7 +81,7 @@
 			</div>
 		</div>
 
-		<table id="example" class="table table-striped">
+		<table class="table table-striped">
 			<caption>Wolne terminy</caption>
 			<tr>
 				<th>Data wizyty</th>

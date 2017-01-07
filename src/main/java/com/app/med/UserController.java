@@ -1,8 +1,5 @@
 package com.app.med;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,16 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.app.model.medical.Referal;
-import com.app.model.medical.finder.ReferalFinder;
-import com.app.query.Criteria;
-import com.app.query.QueryObject;
-import com.app.registry.Registry;
 import com.app.transaction.TransactionScript;
 import com.app.transaction.user.BookAppointmentForThePatient;
 import com.app.transaction.user.CancelAppointmentForThePatient;
 import com.app.transaction.user.GetFreeVisitForPatient;
 import com.app.transaction.user.GetMedicalPrescriptionForPatient;
+import com.app.transaction.user.GetPatientSampleForVisit;
 import com.app.transaction.user.GetReferalForPatient;
 import com.app.transaction.user.GetSearchOptionForVisit;
 import com.app.transaction.user.GetUserData;
@@ -124,6 +117,16 @@ public class UserController {
 		transactionScript.run();
 
 		return "showreferal";
+	}
+	
+	@RequestMapping(value = "/examination", method = RequestMethod.GET)
+	public String showSample(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		TransactionScript transactionScript = new GetPatientSampleForVisit(request, response);
+
+		transactionScript.run();
+		
+		return "examination";
 	}
 
 }

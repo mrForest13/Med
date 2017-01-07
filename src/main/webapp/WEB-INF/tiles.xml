@@ -72,7 +72,7 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/service/patientsearch.jsp" />
 	</definition>
-	
+
 	<definition name="showreferal" extends="base.definition">
 		<put-attribute name="title" value="Skierowania" />
 		<put-attribute name="body"
@@ -83,36 +83,52 @@
 		<put-attribute name="title" value="Wyszukaj" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/doctor/doktorpatientsearch.jsp" />
-	</definition>	
-	
+	</definition>
+
 	<definition name="doktorprescriptions" extends="base.definition">
 		<put-attribute name="title" value="Recepty" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/doctor/doktorprescriptions.jsp" />
-	</definition>	
+	</definition>
 
 	<definition name="doktorshowreferal" extends="base.definition">
 		<put-attribute name="title" value="doktor" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/doctor/doktorshowreferal.jsp" />
-	</definition>	
-	
+	</definition>
+
 	<definition name="doktornote" extends="base.definition">
 		<put-attribute name="title" value="doktor" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/doctor/doktornote.jsp" />
-	</definition>	
-	
+	</definition>
+
 	<definition name="doktorexamination" extends="base.definition">
 		<put-attribute name="title" value="Badania" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/doctor/doktorexamination.jsp" />
-	</definition>	
-	
-		<definition name="userexamination" extends="base.definition">
+	</definition>
+
+	<definition name="userexamination" extends="base.definition">
 		<put-attribute name="title" value="Wyniki badan" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/user/examination.jsp" />
-	</definition>	
+	</definition>
+
+	<definition name="labshowvisit" extends="base.definition">
+		<put-attribute name="title" value="Pacjent" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/lab/labshowvisit.jsp" />
+	</definition>
+
+	<definition name="addsample" extends="base.definition">
+		<put-attribute name="title" value="Wyniki" />
+		<put-attribute name="body" value="/WEB-INF/views/lab/addsample.jsp" />
+	</definition>
+	
+	<definition name="examination" extends="base.definition">
+		<put-attribute name="title" value="Wyniki" />
+		<put-attribute name="body" value="/WEB-INF/views/user/examination.jsp" />
+	</definition>
 
 </tiles-definitions>

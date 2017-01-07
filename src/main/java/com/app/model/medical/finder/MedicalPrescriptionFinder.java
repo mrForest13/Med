@@ -139,4 +139,10 @@ public class MedicalPrescriptionFinder implements IUserFinder<MedicalPrescriptio
 		
 	}
 
+	@Override
+	public MedicalPrescription findById(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
