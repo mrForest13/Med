@@ -49,7 +49,7 @@ public class DoktorController {
 
 		transactionScript.run();
 
-		return "redirect:/doktor/patient";
+		return "redirect:/doktor/prescriptions";
 	}
 
 	@RequestMapping(value = "/patient", method = { RequestMethod.POST, RequestMethod.GET })

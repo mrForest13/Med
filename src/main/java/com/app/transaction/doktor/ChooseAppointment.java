@@ -32,8 +32,8 @@ public class ChooseAppointment extends TransactionScript {
 
 		Visit visit = Registry.visitFinder().findById(id);
 
-		redirectAttributes.addAttribute("pesel", ((Patient)visit.getPatient()).getPesel());
-
+		redirectAttributes.addAttribute("id", (visit.getId()));
+		
 		logger.info(visit.toString());
 
 		visit.update();

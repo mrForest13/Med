@@ -24,7 +24,7 @@
 	</table>
 
 	<table class="table table-striped">
-		<caption>Wykorzystane Skierowania</caption>
+		<caption>Dodaj skierowanie</caption>
 		<tr>
 			<th>Data Wystawienia</th>
 			<th>Typ Wizyty / Badania</th>
