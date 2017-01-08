@@ -16,7 +16,6 @@ public class MoneyTest {
 	
 	@Test
 	public void testCorrect() {
-	//	fail("Not yet implemented");
 		Money money = new Money(100,"PLN");
 		money.getCurrency();
 		//System.out.println(money.getCurrency());
@@ -24,7 +23,6 @@ public class MoneyTest {
 	
 	@Test
 	public void testFake() {
-	//	fail("Not yet implemented");
 		Money money = new Money(100,"PLC");
 		money.getCurrency();
 		//System.out.print(money.getCurrency());
