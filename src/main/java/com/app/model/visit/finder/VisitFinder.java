@@ -22,7 +22,7 @@ import com.app.model.visit.Visit;
 import com.app.model.visit.VisitType;
 import com.app.query.QueryObject;
 import com.app.registry.Registry;
-import com.app.transaction.Money;
+import com.app.transaction.payment.Money;
 
 public class VisitFinder implements IQueryFinder<Visit> {
 

@@ -11,13 +11,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.app.transaction.TransactionScript;
+import com.app.transaction.payment.SendRequestToPaymentSysystem;
 import com.app.transaction.service.BookAppointmentForThePatient;
 import com.app.transaction.service.CancelAppointmentForThePatient;
 import com.app.transaction.service.ConfirmAppointmentForThePatient;
 import com.app.transaction.service.GetVisitsForPatient;
-
 import com.app.transaction.user.GetSearchOptionForVisit;
-import com.app.transaction.user.GetVisitForPatient;
 
 
 @Controller
@@ -60,6 +59,18 @@ public class ServiceController {
 			RedirectAttributes redirectAttributes) throws Exception {
 
 		TransactionScript transactionScript = new ConfirmAppointmentForThePatient(request, response,
+				redirectAttributes);
+
+		transactionScript.run();
+
+		return "redirect:/service/patient";
+	}
+	
+	@RequestMapping(value = "/payment/{id}", method = RequestMethod.GET)
+	public String pay(HttpServletRequest request, HttpServletResponse response,
+			RedirectAttributes redirectAttributes) throws Exception {
+
+		TransactionScript transactionScript = new SendRequestToPaymentSysystem(request, response,
 				redirectAttributes);
 
 		transactionScript.run();

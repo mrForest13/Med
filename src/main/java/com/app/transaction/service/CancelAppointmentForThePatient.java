@@ -19,6 +19,8 @@ import com.app.query.Criteria;
 import com.app.query.QueryObject;
 import com.app.registry.Registry;
 import com.app.transaction.TransactionScript;
+import com.app.transaction.payment.Money;
+import com.app.transaction.payment.RollbackCash;
 
 public class CancelAppointmentForThePatient extends TransactionScript {
 
@@ -63,6 +65,7 @@ public class CancelAppointmentForThePatient extends TransactionScript {
 		
 		logger.info(visit.toString());
 		
+		visit.setVisitPrice(new Money(RollbackCash.get(user.getPesel()), "PLN"));
 		visit.update();
 		
 		redirectAttributes.addAttribute("pesel", getRequest().getParameter("pesel"));

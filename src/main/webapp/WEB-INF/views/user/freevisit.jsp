@@ -40,6 +40,7 @@
 			<th>Data wizyty</th>
 			<th>Lekarz</th>
 			<th>Rodzaj</th>
+			<th>Cena</th>
 			<th></th>
 		</tr>
 
@@ -49,6 +50,7 @@
 				<td>${visit.getDoctor().firstName}
 					${visit.getDoctor().lastName}</td>
 				<td>${visit.getVisitType().visitType}</td>
+				<td>${visit.getVisitPrice().amount().floatValue()}</td>
 				<td><a class="btn btn-primary"
 					href="${contextPath}/med-1/user/book/${visit.getId()}">rezerwuj</a></td>
 			</tr>

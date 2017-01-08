@@ -1,11 +1,14 @@
-package com.app.transaction;
+package com.app.transaction.payment;
 	import java.io.Serializable;
 	import java.math.BigDecimal;
 	import java.math.MathContext;
 	import java.math.RoundingMode;
 	import java.text.NumberFormat;
 	import java.util.Currency;
-	import static java.math.RoundingMode.HALF_UP;
+
+import org.omg.PortableServer.ServantManagerOperations;
+
+import static java.math.RoundingMode.HALF_UP;
 
 	/**
 	 *
@@ -20,6 +23,11 @@ package com.app.transaction;
 	  
 	  private BigDecimal amount;
 	  private Currency currency;
+	  
+	  public void isOK() {
+		  BigDecimal amountbd = new BigDecimal(0d);
+		  this.amount = amountbd;
+	  }
 
 	  //private MathContext DEFAULT_CONTEXT = new MathContext( 2, HALF_UP );
 

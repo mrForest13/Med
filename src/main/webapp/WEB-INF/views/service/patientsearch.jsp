@@ -27,7 +27,7 @@
 			<th>Data wizyty</th>
 			<th>Lekarz</th>
 			<th>Rodzaj</th>
-			<th></th>
+			<th>Cena</th>
 			<th></th>
 		</tr>
 
@@ -37,10 +37,19 @@
 				<td>${visit.getDoctor().firstName}
 					${visit.getDoctor().lastName}</td>
 				<td>${visit.getVisitType().visitType}</td>
-				<td><a class="btn btn-primary"
-					href="${contextPath}/med-1/service/cancel/${visit.getId()}?pesel=${pesel}">anuluj</a></td>
-				<td><a class="btn btn-primary"
-					href="${contextPath}/med-1/service/confirm/${visit.getId()}?pesel=${pesel}">potwierdz</a></td>
+				<td>${visit.getVisitPrice().amount().floatValue()}</td>
+				<td><c:choose>
+						<c:when test="${visit.getVisitPrice().amount().intValue() == 0}">
+							<a class="btn btn-primary"
+								href="${contextPath}/med-1/service/cancel/${visit.getId()}?pesel=${pesel}">anuluj</a>
+							<a class="btn btn-primary"
+								href="${contextPath}/med-1/service/confirm/${visit.getId()}?pesel=${pesel}">potwierdz</a>
+						</c:when>
+						<c:otherwise>
+							<a class="btn btn-primary"
+								href="${contextPath}/med-1/service/payment/${visit.getId()}?pesel=${pesel}">zaplac</a>
+						</c:otherwise>
+					</c:choose></td>
 			</tr>
 		</c:forEach>
 	</table>
@@ -87,6 +96,7 @@
 				<th>Data wizyty</th>
 				<th>Lekarz</th>
 				<th>Rodzaj</th>
+				<th>Cena</th>
 				<th></th>
 			</tr>
 
@@ -96,6 +106,7 @@
 					<td>${visit.getDoctor().firstName}
 						${visit.getDoctor().lastName}</td>
 					<td>${visit.getVisitType().visitType}</td>
+					<td>${visit.getVisitPrice().amount().floatValue()}</td>
 					<td><a class="btn btn-primary"
 						href="${contextPath}/med-1/service/book/${visit.getId()}?pesel=${pesel}">rezerwuj</a></td>
 				</tr>

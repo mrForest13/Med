@@ -8,11 +8,11 @@ import java.sql.Types;
 
 import com.app.db.ConnectionOracle;
 import com.app.model.user.User;
-import com.app.transaction.Money;
+import com.app.transaction.payment.Money;
 
 public class Visit {
 
-	private static final String updateStatementString = "UPDATE visit Set visit_user_pacjent_id = ?, visit_is_confirmed = ?, visit_note = ? where visit_id = ?";
+	private static final String updateStatementString = "UPDATE visit Set visit_user_pacjent_id = ?, visit_is_confirmed = ?, visit_note = ?, visit_price_amount = ? where visit_id = ?";
 
 	private Long id;
 	private User patient;
@@ -129,7 +129,8 @@ public class Visit {
 
 			insertStatement.setString(2, isVisistConfirmed() ? "Y" : "N");
 			insertStatement.setString(3, getNote());
-			insertStatement.setLong(4, getId());
+			insertStatement.setFloat(4, getVisitPrice().amount().floatValue());
+			insertStatement.setLong(5, getId());
 			insertStatement.executeUpdate();
 
 		} catch (Exception e) {
