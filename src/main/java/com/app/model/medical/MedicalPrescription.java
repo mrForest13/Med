@@ -81,6 +81,10 @@ public class MedicalPrescription {
 		this.additionalRight = additionalRight;
 		this.medicamentList = new HashSet<Medicament>();
 	}
+	
+	public void insert() {
+		
+	}
 
 	@Override
 	public String toString() {

@@ -73,10 +73,13 @@ public class VisitFinder implements IQueryFinder<Visit> {
 
 		VisitType visitType = Registry.visitTypeFinder().findById(rs.getLong(3));
 
-		boolean visistConfirmed = rs.getString(8).equals("N") ? false : true;
+		boolean visistConfirmed = rs.getString(9).equals("N") ? false : true;
+		
+		float amount = rs.getFloat(7);
+		String currCode = rs.getString(8);
 
-		Visit visit = new Visit(id, patient, doctor, visitType, rs.getTimestamp(5), rs.getTimestamp(6), new Money(),
-				visistConfirmed);
+		Visit visit = new Visit(id, patient, doctor, visitType, rs.getTimestamp(5), rs.getTimestamp(6), new Money(amount,currCode),
+				visistConfirmed,rs.getString(10));
 
 		logger.info(visit.toString());
 

@@ -1,7 +1,6 @@
 package com.app.model.visit.finder;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,18 +11,18 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.app.dao.IFinder;
+import com.app.dao.IFinderAll;
 import com.app.db.ConnectionOracle;
-import com.app.model.user.finder.Finder;
 import com.app.model.visit.VisitType;
 
-public class VisitTypeFinder implements IFinder<VisitType> {
+public class VisitTypeFinder implements IFinderAll<VisitType> {
 
 	private static final Logger logger = LoggerFactory.getLogger(VisitTypeFinder.class);
 
 	private static final String byId = "Select * from VISIT_TYPES where visit_type_id = ?";
 	private final String getAll = "Select * from VISIT_TYPES";
 
+	@Override
 	public List<VisitType> getAll() {
 
 		Connection con = null;

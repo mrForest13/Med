@@ -12,7 +12,7 @@ import com.app.transaction.Money;
 
 public class Visit {
 
-	private static final String updateStatementString = "UPDATE visit Set visit_user_pacjent_id = ?, visit_is_confirmed = ? where visit_id = ?";
+	private static final String updateStatementString = "UPDATE visit Set visit_user_pacjent_id = ?, visit_is_confirmed = ?, visit_note = ? where visit_id = ?";
 
 	private Long id;
 	private User patient;
@@ -22,6 +22,7 @@ public class Visit {
 	private Timestamp visitDateTo;
 	private Money visitPrice;
 	private boolean visistConfirmed;
+	private String note; 
 
 	public Long getId() {
 		return id;
@@ -83,7 +84,7 @@ public class Visit {
 	}
 
 	public Visit(Long id, User patient, User doctor, VisitType visitType, Timestamp visitDateFrom,
-			Timestamp visitDateTo, Money visitPrice, boolean visistConfirmed) {
+			Timestamp visitDateTo, Money visitPrice, boolean visistConfirmed,String note) {
 		super();
 		this.id = id;
 		this.patient = patient;
@@ -93,6 +94,7 @@ public class Visit {
 		this.visitDateTo = visitDateTo;
 		this.visitPrice = visitPrice;
 		this.visistConfirmed = visistConfirmed;
+		this.note = note;
 	}
 
 	@Override
@@ -126,7 +128,8 @@ public class Visit {
 				insertStatement.setLong(1, getPatient().getId());
 
 			insertStatement.setString(2, isVisistConfirmed() ? "Y" : "N");
-			insertStatement.setLong(3, getId());
+			insertStatement.setString(3, getNote());
+			insertStatement.setLong(4, getId());
 			insertStatement.executeUpdate();
 
 		} catch (Exception e) {
@@ -138,6 +141,14 @@ public class Visit {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	public String getNote() {
+		return note;
+	}
+
+	public void setNote(String note) {
+		this.note = note;
 	}
 
 }

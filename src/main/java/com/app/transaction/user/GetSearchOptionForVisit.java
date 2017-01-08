@@ -30,7 +30,7 @@ public class GetSearchOptionForVisit extends TransactionScript {
 
 		getRequest().setAttribute("visitType", visit);
 
-		List<VisitType> visitsTypeList = ((VisitTypeFinder) Registry.visitTypeFinder()).getAll();
+		List<VisitType> visitsTypeList = Registry.visitTypeFinder().getAll();
 
 		getRequest().setAttribute("visitTypeList", visitsTypeList);
 

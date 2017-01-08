@@ -45,6 +45,7 @@ public class LoginFilter extends SessionFilter implements Filter {
 		logger.info("SessionId = " + sessionId + "  UserId = " + userId);
 
 		if (sessionId == null || userId == null) {
+			request.setAttribute("type", -1);
 			chain.doFilter(request, response);
 			return;
 		}

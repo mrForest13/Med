@@ -26,7 +26,7 @@ public class Registry {
 
 	private static Registry soleInstance = new Registry();
 	
-	private IFinder<VisitType> visitTypeFinder = new VisitTypeFinder();
+	private IFinderAll<VisitType> visitTypeFinder = new VisitTypeFinder();
 	private IQueryFinder<Visit> visitFinder = new VisitFinder();
 	private IFinder<Patient> patientFinder = new PatientFinder();
 	private IFinderAll<Doctor> doctorFinder = new DoctorFinder();
@@ -42,7 +42,7 @@ public class Registry {
 		return soleInstance;
 	}
 		
-	public static IFinder<VisitType> visitTypeFinder() {
+	public static IFinderAll<VisitType> visitTypeFinder() {
 		return getInstance().visitTypeFinder;
 	}
 	

@@ -30,6 +30,7 @@ public class LabFinder implements IFinder<Lab>, IUserFinder<Lab> {
 	
 	private static final String findById = "Select lab.lab_id, lab.LAB_VISIT_ID, lab.LAB_IS_ADDED from lab where lab_id = ?";
 	private static final String findByLabId = "Select * from Sample where sample_lab_id = ?";
+	private static final String findByVisitId = "Select lab.lab_id, lab.LAB_VISIT_ID, lab.LAB_IS_ADDED from lab where lab_visit_id = ?";
 
 	@Override
 	public List<Lab> findByUserId(Long Userid) {
@@ -66,6 +67,9 @@ public class LabFinder implements IFinder<Lab>, IUserFinder<Lab> {
 
 		return result;
 	}
+	
+	
+	
 
 	private Lab load(ResultSet rs) throws SQLException {
 
@@ -96,6 +100,37 @@ public class LabFinder implements IFinder<Lab>, IUserFinder<Lab> {
 			getStatement = con.prepareStatement(findById);
 			getStatement.setLong(1, id);
 			logger.info(findById);
+			rs = getStatement.executeQuery();
+
+			if(rs.next())
+				result = load(rs);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				getStatement.close();
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return result;
+	}
+	
+	public Lab findByVisitId(Long id) {
+		
+		Connection con = null;
+		PreparedStatement getStatement = null;
+		Lab result = null;
+		ResultSet rs = null;
+
+		try {
+			con = ConnectionOracle.getInstance();
+			getStatement = con.prepareStatement(findByVisitId);
+			getStatement.setLong(1, id);
+			logger.info(findByVisitId);
 			rs = getStatement.executeQuery();
 
 			if(rs.next())

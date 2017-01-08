@@ -130,5 +130,11 @@
 		<put-attribute name="title" value="Wyniki" />
 		<put-attribute name="body" value="/WEB-INF/views/user/examination.jsp" />
 	</definition>
+	
+	<definition name="patientvisit" extends="base.definition">
+		<put-attribute name="title" value="wizyty" />
+		<put-attribute name="body" value="/WEB-INF/views/doctor/patientvisit.jsp" />
+	</definition>
+	
 
 </tiles-definitions>

@@ -13,7 +13,7 @@ public class MoneyTest {
 		logger.info("External payment returns: "+ random);
 		return random;  
 	}
-	
+	 
 	@Test
 	public void testCorrect() {
 		Money money = new Money(100,"PLN");

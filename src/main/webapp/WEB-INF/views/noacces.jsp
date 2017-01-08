@@ -7,7 +7,7 @@
 		<br />
 		<br />
 		<br />
-		<h1>Brak dostepu</h1>
+		<p class="text-center h1">Brak dostepu!</p>
 
 	</div>
 	<div class="col-md-4"></div>

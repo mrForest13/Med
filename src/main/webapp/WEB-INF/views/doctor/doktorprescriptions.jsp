@@ -3,48 +3,67 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+
 <div class="container">
+
+	<div class="row">
+		<div class="col-sm-3"></div>
+		<div class="col-sm-8">
+
+			<form class="form-inline" method="POST">
+				<div class="form-group">
+					<label for="email">Email address:</label> <select
+						class="form-control" name="visitType" id="sel1">
+						<c:forEach var="visitType" items="${visitTypeList}">
+							<option>${visitType.visitType}</option>
+						</c:forEach>
+					</select>
+				</div>
+				<button type="submit" class="btn btn-primary">dodaj</button>
+				<a class="btn btn-primary"
+					href="${contextPath}/doktor/patient?pesel=${pesel}">powrot</a>
+			</form>
+		</div>
+
+		<div class="col-sm-3"></div>
+	</div>
+
+	<br />
+	<br />
+
 	<table class="table table-striped">
-		<caption>Dodaj recepte</caption>
+		<caption>Dostepne Skierowania</caption>
 		<tr>
-			<th>Data wystawienia</th>
-			<th>Lekarz Wystawiajacy</th>
-			<th>Leki</th>
-			<th/>
+			<th>Data Wystawienia</th>
+			<th>Typ Wizyty / Badania</th>
+			<th>Lekarz</th>
 		</tr>
 
-		<c:forEach var="prescription" items="${prescriptionList}">
+		<c:forEach var="referal" items="${referalListN}">
 			<tr>
-				<td>${prescription.dateOfIssue}</td>
-				<td>${prescription.getDoctor().firstName}
-					${prescription.getDoctor().lastName}</td>
-				<td><c:forEach var="medicament"
-						items="${prescription.getMedicamentList()}">
-					${medicament.lekName} , 
-				</c:forEach></td>
-				<td><a class="btn btn-primary" href="">Pobierz pdf</a></td>
+				<td>${referal.dateOfissue}</td>
+				<td>${referal.getVisitType().visitType}</td>
+				<td>${referal.getDoctor().firstName}
+					${referal.getDoctor().lastName}</td>
 			</tr>
 		</c:forEach>
 	</table>
+
 	<table class="table table-striped">
-		<caption>Recepty</caption>
+		<caption>Wykorzystane Skierowania</caption>
 		<tr>
-			<th>Data wystawienia</th>
-			<th>Lekarz Wystawiajacy</th>
-			<th>Leki</th>
-			<th/>
+			<th>Data Wystawienia</th>
+			<th>Typ Wizyty / Badania</th>
+			<th>Lekarz</th>
 		</tr>
 
-		<c:forEach var="prescription" items="${prescriptionList}">
+		<c:forEach var="referal" items="${referalListY}">
 			<tr>
-				<td>${prescription.dateOfIssue}</td>
-				<td>${prescription.getDoctor().firstName}
-					${prescription.getDoctor().lastName}</td>
-				<td><c:forEach var="medicament"
-						items="${prescription.getMedicamentList()}">
-					${medicament.lekName} , 
-				</c:forEach></td>
-				<td><a class="btn btn-primary" href="">Pobierz pdf</a></td>
+				<td>${referal.dateOfissue}</td>
+				<td>${referal.getVisitType().visitType}</td>
+				<td>${referal.getDoctor().firstName}
+					${referal.getDoctor().lastName}</td>
 			</tr>
 		</c:forEach>
 	</table>

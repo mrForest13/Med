@@ -81,6 +81,9 @@ referal_is_used VARCHAR(1) NOT NULL,
 referal_date_of_issue DATE NOT NULL
 );
 
+CREATE SEQUENCE REFERAL_SEQ
+   START WITH 5;
+
 CREATE TABLE visit(
 visit_id NUMBER NOT NULL, PRIMARY KEY(visit_id),
 visit_uzytkownik_doktor_id NUMBER NOT NULL, FOREIGN KEY (visit_uzytkownik_doktor_id) REFERENCES uzytkownik(uzytkownik_uz_id),
@@ -146,4 +149,5 @@ DROP SEQUENCE UZYTKOWNIK_SEQ;
 DROP SEQUENCE UZYTKOWNIK_P_SEQ;
 DROP SEQUENCE SESSION_SEQ;
 DROP SEQUENCE SAMPLE_SEQ;
+DROP SEQUENCE REFERAL_SEQ;
 */

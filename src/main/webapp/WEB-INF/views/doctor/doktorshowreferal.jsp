@@ -3,7 +3,34 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+
 <div class="container">
+
+	<div class="row">
+		<div class="col-sm-3"></div>
+		<div class="col-sm-8">
+
+			<form class="form-inline" method="POST">
+				<div class="form-group">
+					<label for="email">Email address:</label> <select
+						class="form-control" name="visitType" id="sel1">
+						<c:forEach var="visitType" items="${visitTypeList}">
+							<option>${visitType.visitType}</option>
+						</c:forEach>
+					</select>
+				</div>
+				<button type="submit" class="btn btn-primary">dodaj</button>
+				<a class="btn btn-primary"
+					href="${contextPath}/doktor/patient?pesel=${pesel}">powrot</a>
+			</form>
+		</div>
+
+		<div class="col-sm-3"></div>
+	</div>
+
+	<br />
+	<br />
 
 	<table class="table table-striped">
 		<caption>Dostepne Skierowania</caption>
@@ -24,7 +51,7 @@
 	</table>
 
 	<table class="table table-striped">
-		<caption>Dodaj skierowanie</caption>
+		<caption>Wykorzystane Skierowania</caption>
 		<tr>
 			<th>Data Wystawienia</th>
 			<th>Typ Wizyty / Badania</th>

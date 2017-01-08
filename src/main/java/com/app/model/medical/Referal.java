@@ -3,6 +3,7 @@ package com.app.model.medical;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
@@ -12,7 +13,8 @@ import com.app.model.visit.VisitType;
 import com.app.registry.Registry;
 
 public class Referal {
-	
+
+	private static final String insertStatementString = "INSERT INTO referal values (REFERAL_SEQ.nextval,?,?,?,?,?)";
 	private static final String updateStatementString = "UPDATE referal Set REFERAL_IS_USED = ? where REFERAL_ID = ?";
 
 	private Long id;
@@ -101,6 +103,34 @@ public class Referal {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	public void insert() {
+
+		PreparedStatement insertStatement = null;
+		Connection con = null;
+
+		try {
+			con = ConnectionOracle.getInstance();
+
+			insertStatement = con.prepareStatement(insertStatementString, new String[] { "REFERAL_ID" });
+			insertStatement.setLong(1, getPatient().getId());
+			insertStatement.setLong(2, getDoctor().getId());
+			insertStatement.setLong(3, getVisitType().getId());
+			insertStatement.setString(4, isUsed() ? "Y" : "N");
+			insertStatement.setDate(5, getDateOfissue());
+			insertStatement.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				insertStatement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
 	}
 
 	@Override
