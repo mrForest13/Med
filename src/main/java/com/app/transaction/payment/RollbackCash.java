@@ -22,7 +22,12 @@ public class RollbackCash {
 	public static float get(String pesel) {
 		if (rollback.get(pesel)==null)
 			return 0f;
-		else
-			return rollback.get(pesel);
+		else {
+			
+			float value = rollback.get(pesel);;
+			rollback.remove(pesel);
+			
+			return value;
+		}
 	}
 }

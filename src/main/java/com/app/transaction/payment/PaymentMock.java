@@ -5,10 +5,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class PaymentMock {
+	
 	private static final Logger logger = LoggerFactory.getLogger(PaymentMock.class);
-	
-	
-	
+
 	private Money money = null;
 	
 	public PaymentMock(Money money) {
@@ -20,9 +19,8 @@ public class PaymentMock {
 		RollbackCash.save(pesel, money.amount().floatValue());
 		
 		try {
-			Thread.sleep(15000);
+			Thread.sleep(10000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
