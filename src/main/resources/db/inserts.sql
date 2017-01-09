@@ -168,20 +168,20 @@ into visit values
 into visit values
 (12,7,3,'',TO_DATE('2017-01-17 16:30','YYYY-MM-DD HH24:MI'),TO_DATE('2017-01-17 17:00','YYYY-MM-DD HH24:MI'),100,'PLN','N','')
 into visit values --LABORATORIUM
-(13,7,6,1,TO_DATE('2017-01-06 16:30','YYYY-MM-DD HH24:MI'),TO_DATE('2017-01-06 17:00','YYYY-MM-DD HH24:MI'),0,'PLN','Y','')
+(13,7,6,'',TO_DATE('2017-01-06 16:30','YYYY-MM-DD HH24:MI'),TO_DATE('2017-01-06 17:00','YYYY-MM-DD HH24:MI'),0,'PLN','N','')
 into visit values
-(14,7,6,1,TO_DATE('2017-01-05 16:30','YYYY-MM-DD HH24:MI'),TO_DATE('2017-01-05 17:00','YYYY-MM-DD HH24:MI'),0,'PLN','Y','')
+(14,7,6,'',TO_DATE('2017-01-15 16:30','YYYY-MM-DD HH24:MI'),TO_DATE('2017-01-15 17:00','YYYY-MM-DD HH24:MI'),0,'PLN','N','')
 into visit values
-(15,7,6,1,TO_DATE('2017-01-03 16:30','YYYY-MM-DD HH24:MI'),TO_DATE('2017-01-03 17:00','YYYY-MM-DD HH24:MI'),0,'PLN','Y','')
+(15,7,6,'',TO_DATE('2017-01-13 16:30','YYYY-MM-DD HH24:MI'),TO_DATE('2017-01-13 17:00','YYYY-MM-DD HH24:MI'),0,'PLN','N','')
 into visit values
-(16,7,6,1,TO_DATE('2017-01-06 16:30','YYYY-MM-DD HH24:MI'),TO_DATE('2017-01-06 17:00','YYYY-MM-DD HH24:MI'),0,'PLN','Y','')
+(16,7,6,'',TO_DATE('2017-01-16 16:30','YYYY-MM-DD HH24:MI'),TO_DATE('2017-01-16 17:00','YYYY-MM-DD HH24:MI'),0,'PLN','N','')
 select * from dual;
 
 --badania lab
 insert all into lab values
 (1,13,'','Y')
 into lab values
-(2,14,'','Y')
+(2,14,'','N')
 into lab values
 (3,15,'','N')
 into lab values
@@ -195,10 +195,6 @@ into sample values
 (2,1,'Plytki krwi','35','5','50','RO / ML','wynik do konsultacji')
 into sample values
 (3,1,'Rozmaz','50','40','70','RO / ML','wynik do konsultacji')
-into sample values
-(4,2,'TSH','4','2','7','RO / ML','')
-into sample values
-(5,2,'Testosteron','100','50','200','RO / ML','wynik do konsultacji')
 into sample values
 (6,1,'Progesteron','10','2','80','RO / ML','')
 into sample values
