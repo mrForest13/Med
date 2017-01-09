@@ -26,6 +26,7 @@ import com.app.transaction.user.UpdateUserData;
 public class UserController {
 
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+	
 
 	@RequestMapping(value = "/visit", method = { RequestMethod.POST, RequestMethod.GET })
 	public String registrationUser(HttpServletRequest request, HttpServletResponse response) throws Exception {

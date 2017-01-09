@@ -2,6 +2,7 @@ package com.app.model.medical;
 
 public class Medicament {
 
+	private Long id;
 	private String lekName;
 	private int refundPercent;
 
@@ -21,8 +22,9 @@ public class Medicament {
 		this.refundPercent = refundPercent;
 	}
 
-	public Medicament(String lekName, int refundPercent) {
+	public Medicament(Long id ,String lekName, int refundPercent) {
 		super();
+		this.id = id;
 		this.lekName = lekName;
 		this.refundPercent = refundPercent;
 	}
@@ -37,6 +39,14 @@ public class Medicament {
 	@Override
 	public String toString() {
 		return "Medicament [lekName=" + lekName + ", refundPercent=" + refundPercent + "]";
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 }

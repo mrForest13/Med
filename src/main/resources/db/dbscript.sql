@@ -52,6 +52,9 @@ CREATE TABLE recepta(
 	recepta_additional_rigths VARCHAR(1) NOT NULL
 );
 
+CREATE SEQUENCE RECEPTA_SEQ
+   START WITH 4;
+
 --poszczegolne leki w recepcie
 CREATE TABLE lek(
 	lek_id NUMBER NOT NULL, PRIMARY KEY(lek_id),
@@ -59,11 +62,17 @@ CREATE TABLE lek(
 	lek_refund NUMBER not null --% refundacji
 );
 
+CREATE SEQUENCE LEK_SEQ
+   START WITH 7;
+
 CREATE TABLE recepta_lek (
 	recepta_lek_id NUMBER NOT NULL, PRIMARY KEY(recepta_lek_id),
 	lek_id NUMBER NOT NULL, FOREIGN KEY (lek_id) REFERENCES lek(lek_id),
 	recepta_id NUMBER NOT NULL, FOREIGN KEY (recepta_id) REFERENCES recepta(recepta_id)
 );
+
+CREATE SEQUENCE RECEPTA_LEK_SEQ
+   START WITH 8;
 
 --dostepne rodzaje badan / wizyt
 CREATE TABLE visit_types(

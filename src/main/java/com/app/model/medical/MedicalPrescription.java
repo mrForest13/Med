@@ -1,14 +1,22 @@
 package com.app.model.medical;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.app.db.ConnectionOracle;
 import com.app.model.medical.finder.MedicalPrescriptionFinder;
 import com.app.model.user.User;
 
 public class MedicalPrescription {
 
+	private static final String insertStatementString = "INSERT INTO recepta values (RECEPTA_SEQ.nextval,?,?,?,?)";
+	private static final String insert2StatementString = "INSERT INTO recepta_lek values (RECEPTA_LEK_SEQ.nextval,?,?)";
+	
 	private Long id;
 	private User patient;
 	private User doctor;
@@ -82,7 +90,71 @@ public class MedicalPrescription {
 		this.medicamentList = new HashSet<Medicament>();
 	}
 	
+	public MedicalPrescription() {}
+
 	public void insert() {
+		
+		PreparedStatement insertStatement = null;
+		Connection con = null;
+		ResultSet rs = null;
+
+		try {
+			con = ConnectionOracle.getInstance();
+
+			insertStatement = con.prepareStatement(insertStatementString, new String[] { "RECEPTA_ID" });
+			insertStatement.setLong(1, getPatient().getId());
+			insertStatement.setLong(2, getDoctor().getId());
+			insertStatement.setTimestamp(3, getDateOfIssue());
+			insertStatement.setString(4, isAdditionalRight() ? "Y" : "N");
+			insertStatement.executeUpdate();
+
+			rs = insertStatement.getGeneratedKeys();
+
+			if (rs.next())
+				setId(rs.getLong(1));
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				insertStatement.close();
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
+	public void insertMedicament(Medicament medicament) {
+		
+		PreparedStatement insertStatement = null;
+		Connection con = null;
+		ResultSet rs = null;
+
+		try {
+			con = ConnectionOracle.getInstance();
+
+			insertStatement = con.prepareStatement(insert2StatementString, new String[] { "RECEPTA_LEK_ID" });
+			insertStatement.setLong(1, medicament.getId());
+			insertStatement.setLong(2, getId());
+			insertStatement.executeUpdate();
+
+			rs = insertStatement.getGeneratedKeys();
+
+			if (rs.next())
+				setId(rs.getLong(1));
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				insertStatement.close();
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		
 	}
 

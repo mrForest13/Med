@@ -122,7 +122,7 @@ public class MedicalPrescriptionFinder implements IUserFinder<MedicalPrescriptio
 			rs = getStatement.executeQuery();
 
 			if(rs.next())
-				result = new Medicament(rs.getString(2), rs.getInt(3));
+				result = new Medicament(rs.getLong(1),rs.getString(2), rs.getInt(3));
 
 		} catch (Exception e) {
 			e.printStackTrace();

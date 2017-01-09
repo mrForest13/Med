@@ -13,7 +13,7 @@
 
 			<form class="form-inline" method="POST">
 				<div class="form-group">
-					<label for="email">Email address:</label> <select
+					<label for="email">Rodzaj wizyty:</label> <select
 						class="form-control" name="visitType" id="sel1">
 						<c:forEach var="visitType" items="${visitTypeList}">
 							<option>${visitType.visitType}</option>
