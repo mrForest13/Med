@@ -105,6 +105,11 @@ visit_price_currency VARCHAR(3),
 visit_is_confirmed VARCHAR(1),
 visit_note VARCHAR(2000)
 );
+
+
+CREATE SEQUENCE VISIT_SEQ
+   START WITH 17;
+
 --wyniki badan
 CREATE TABLE lab(
 lab_id NUMBER NOT NULL, PRIMARY KEY(lab_id),
@@ -112,6 +117,9 @@ lab_visit_id NUMBER NOT NULL, FOREIGN KEY (lab_visit_id) REFERENCES visit(visit_
 lab_file BLOB, --zapisywanie wygenerowanego pdfa?
 lab_is_added VARCHAR(1)
 );
+
+CREATE SEQUENCE LAB_SEQ
+   START WITH 5;
 
 CREATE TABLE sample(
 sample_id NUMBER NOT NULL, PRIMARY KEY(sample_id),
@@ -162,4 +170,6 @@ DROP SEQUENCE REFERAL_SEQ;
 DROP SEQUENCE RECEPTA_LEK_SEQ;
 DROP SEQUENCE LEK_SEQ;
 DROP SEQUENCE RECEPTA_SEQ;
+DROP SEQUENCE LAB_SEQ;
+DROP SEQUENCE VISIT_SEQ;
 */

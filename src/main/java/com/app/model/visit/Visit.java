@@ -2,6 +2,7 @@ package com.app.model.visit;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.sql.Types;
@@ -13,7 +14,8 @@ import com.app.transaction.payment.Money;
 public class Visit {
 
 	private static final String updateStatementString = "UPDATE visit Set visit_user_pacjent_id = ?, visit_is_confirmed = ?, visit_note = ?, visit_price_amount = ? where visit_id = ?";
-
+	private static final String insertStatementString = "INSERT INTO VISIT values (VISIT_SEQ.nextval,?,?,?,?,?,?,?,?,?)";
+	
 	private Long id;
 	private User patient;
 	private User doctor;
@@ -137,6 +139,44 @@ public class Visit {
 			e.printStackTrace();
 		} finally {
 			try {
+				insertStatement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public void insert() {
+		
+		PreparedStatement insertStatement = null;
+		Connection con = null;
+		ResultSet rs = null;
+
+		try {
+			con = ConnectionOracle.getInstance();
+
+			insertStatement = con.prepareStatement(insertStatementString, new String[] { "VISIT_ID" });
+			insertStatement.setLong(1, doctor.getId());
+			insertStatement.setLong(2, visitType.getId());
+			insertStatement.setNull(3, Types.NULL);
+			insertStatement.setTimestamp(4, getVisitDateFrom());
+			insertStatement.setTimestamp(5, getVisitDateTo());
+			insertStatement.setFloat(6, getVisitPrice().amount().floatValue());
+			insertStatement.setString(7, "PLN");
+			insertStatement.setString(8, isVisistConfirmed() ? "Y" : "N");
+			insertStatement.setNull(9, Types.NULL);
+			insertStatement.executeUpdate();
+			
+			rs = insertStatement.getGeneratedKeys();
+
+			if (rs.next())
+				setId(rs.getLong(1));
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
 				insertStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();

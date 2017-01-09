@@ -3,6 +3,8 @@ package com.app.model.lab;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.SQLType;
+import java.sql.Types;
 import java.util.List;
 
 import com.app.db.ConnectionOracle;
@@ -13,6 +15,7 @@ import com.app.registry.Registry;
 public class Lab {
 
 	private static final String insertStatementString = "INSERT INTO SAMPLE values (SAMPLE_SEQ.nextval,?,?,?,?,?,?,?)";
+	private static final String insertStatementString2 = "INSERT INTO LAB values (LAB_SEQ.nextval,?,?,?)";
 	private static final String updateStatementString = "UPDATE Lab Set lab_is_added = ? where lab_id = ?";
 
 	private Long id;
@@ -92,6 +95,31 @@ public class Lab {
 			insertStatement.setString(5, sample.getStandardNegative());
 			insertStatement.setString(6, sample.getUnit());
 			insertStatement.setString(7, sample.getDescription());
+			insertStatement.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				insertStatement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public void insert() {
+		
+		PreparedStatement insertStatement = null;
+		Connection con = null;
+
+		try {
+			con = ConnectionOracle.getInstance();
+
+			insertStatement = con.prepareStatement(insertStatementString2, new String[] { "LAB_ID" });
+			insertStatement.setLong(1, visit.getId());
+			insertStatement.setNull(2, Types.NULL);
+			insertStatement.setString(3, isAdded() ? "Y" : "N");
 			insertStatement.executeUpdate();
 
 		} catch (Exception e) {

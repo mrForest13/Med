@@ -11,6 +11,7 @@
 		</div>
 		<ul class="nav navbar-nav">
 			<li><a href="${contextPath}/service/search">Pokaz Pacjenta</a></li>
+			<li><a href="${contextPath}/service/visit/add">Dodaj Wizyte</a></li>
 		</ul>
 		<a class="btn btn-danger navbar-btn" href="${contextPath}/logout">Wyloguj</a>
 	</div>

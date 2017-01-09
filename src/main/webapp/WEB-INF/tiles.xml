@@ -136,5 +136,10 @@
 		<put-attribute name="body" value="/WEB-INF/views/doctor/patientvisit.jsp" />
 	</definition>
 	
+	<definition name="addvisit" extends="base.definition">
+		<put-attribute name="title" value="dodaj" />
+		<put-attribute name="body" value="/WEB-INF/views/service/addvisit.jsp" />
+	</definition>
+	
 
 </tiles-definitions>

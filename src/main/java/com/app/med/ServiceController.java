@@ -12,6 +12,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.app.transaction.TransactionScript;
 import com.app.transaction.payment.SendRequestToPaymentSysystem;
+import com.app.transaction.service.AddVisitToSystem;
 import com.app.transaction.service.BookAppointmentForThePatient;
 import com.app.transaction.service.CancelAppointmentForThePatient;
 import com.app.transaction.service.ConfirmAppointmentForThePatient;
@@ -86,6 +87,26 @@ public class ServiceController {
 		transactionScript.run();
 		
 		return "redirect:/service/patient";
+	}
+	
+	@RequestMapping(value = "/visit/add", method = RequestMethod.GET)
+	public String showAddVisit(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		TransactionScript transactionScript2 = new GetSearchOptionForVisit(request, response);
+		
+		transactionScript2.run();
+		
+		return "addvisit";
+	}
+	
+	@RequestMapping(value = "/visit/add", method = RequestMethod.POST)
+	public String addVisit(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		TransactionScript transactionScript = new AddVisitToSystem(request, response);
+		
+		transactionScript.run();
+		
+		return "redirect:/service/visit/add";
 	}
 
 }
