@@ -43,6 +43,7 @@ public class GetPrescriptionForPatient extends TransactionScript {
 
 		getRequest().setAttribute("medicament", medicament);
 		
+
 		List<Medicament> medicamentList = Registry.medicamentFinder().getAll();
 		
 		getRequest().setAttribute("medicamentList", medicamentList);
