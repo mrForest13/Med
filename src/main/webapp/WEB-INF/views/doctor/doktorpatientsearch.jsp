@@ -76,7 +76,7 @@
 							<a class="btn btn-primary"
 								href="${contextPath}/med-1/doktor/patient/${user.getId()}/referal">skierowania</a>
 							<a class="btn btn-primary"
-								href="${contextPath}/med-1/doktor/patient/${user.getId()}/referal">Recepty</a>
+								href="${contextPath}/med-1/doktor/patient/${user.getId()}/prescriptions">Recepty</a>
 						</div>
 					</div>
 

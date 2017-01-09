@@ -9,11 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.app.path.PathVariable;
 import com.app.transaction.TransactionScript;
 import com.app.transaction.doktor.AddNoteForPatient;
 import com.app.transaction.doktor.AddReferalForPatient;
 import com.app.transaction.doktor.GetNoteForThePatient;
+import com.app.transaction.doktor.GetPrescriptionForPatient;
 import com.app.transaction.doktor.GetSampleForPatient;
 import com.app.transaction.doktor.GetUserDataByPesel;
 import com.app.transaction.doktor.GetVisitForPatient;
@@ -99,5 +99,15 @@ public class DoktorController {
 		transactionScript.run();
 		
 		return "redirect:/doktor/patient/{userid}/note/{visitid}";
+	}
+	
+	@RequestMapping(value = "/patient/{userid}/prescriptions", method = RequestMethod.GET)
+	public String showPrescriptions(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		TransactionScript transactionScript = new GetPrescriptionForPatient(request,response);
+		
+		transactionScript.run();
+		
+		return "doktorprescriptions";
 	}
 }

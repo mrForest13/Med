@@ -29,41 +29,25 @@
 		<div class="col-sm-3"></div>
 	</div>
 
-	<br />
-	<br />
+	<br /> <br />
 
 	<table class="table table-striped">
-		<caption>Dostepne Skierowania</caption>
+		<caption>Recepty</caption>
 		<tr>
-			<th>Data Wystawienia</th>
-			<th>Typ Wizyty / Badania</th>
-			<th>Lekarz</th>
+			<th>Data wystawienia</th>
+			<th>Lekarz Wystawiajacy</th>
+			<th>Leki</th>
 		</tr>
 
-		<c:forEach var="referal" items="${referalListN}">
+		<c:forEach var="prescription" items="${prescriptionList}">
 			<tr>
-				<td>${referal.dateOfissue}</td>
-				<td>${referal.getVisitType().visitType}</td>
-				<td>${referal.getDoctor().firstName}
-					${referal.getDoctor().lastName}</td>
-			</tr>
-		</c:forEach>
-	</table>
-
-	<table class="table table-striped">
-		<caption>Wykorzystane Skierowania</caption>
-		<tr>
-			<th>Data Wystawienia</th>
-			<th>Typ Wizyty / Badania</th>
-			<th>Lekarz</th>
-		</tr>
-
-		<c:forEach var="referal" items="${referalListY}">
-			<tr>
-				<td>${referal.dateOfissue}</td>
-				<td>${referal.getVisitType().visitType}</td>
-				<td>${referal.getDoctor().firstName}
-					${referal.getDoctor().lastName}</td>
+				<td>${prescription.dateOfIssue}</td>
+				<td>${prescription.getDoctor().firstName}
+					${prescription.getDoctor().lastName}</td>
+				<td><c:forEach var="medicament"
+						items="${prescription.getMedicamentList()}">
+					${medicament.lekName} , 
+				</c:forEach></td>
 			</tr>
 		</c:forEach>
 	</table>
