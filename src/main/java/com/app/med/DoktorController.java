@@ -125,14 +125,4 @@ public class DoktorController {
 		return "redirect:/doktor/patient/{userid}/prescriptions";
 	}
 
-	@RequestMapping(value = "/patient/{userid}/prescriptions", method = RequestMethod.GET)
-	public String showPrescriptions(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
-		TransactionScript transactionScript = new GetPrescriptionForPatient(request, response);
-
-		transactionScript.run();
-
-		return "doktorprescriptions";
-	}
-
 }
