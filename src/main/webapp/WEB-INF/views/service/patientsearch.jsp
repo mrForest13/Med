@@ -47,6 +47,8 @@
 						</c:when>
 						<c:otherwise>
 							<a class="btn btn-primary"
+								href="${contextPath}/med-1/service/cancel/${visit.getId()}?pesel=${pesel}">anuluj</a>
+							<a class="btn btn-primary"
 								href="${contextPath}/med-1/service/payment/${visit.getId()}?pesel=${pesel}">zaplac</a>
 						</c:otherwise>
 					</c:choose></td>

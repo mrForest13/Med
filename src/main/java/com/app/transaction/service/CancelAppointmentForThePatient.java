@@ -65,7 +65,12 @@ public class CancelAppointmentForThePatient extends TransactionScript {
 		
 		logger.info(visit.toString());
 		
-		visit.setVisitPrice(new Money(RollbackCash.get(user.getPesel()), "PLN"));
+		
+		if(visit.getVisitPrice().amount().floatValue()==0) {
+		
+			visit.setVisitPrice(new Money(RollbackCash.get(user.getPesel()), "PLN"));			
+		}
+		
 		visit.update();
 		
 		redirectAttributes.addAttribute("pesel", getRequest().getParameter("pesel"));
