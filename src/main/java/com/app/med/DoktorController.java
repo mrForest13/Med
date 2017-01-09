@@ -102,10 +102,10 @@ public class DoktorController {
 
 		return "redirect:/doktor/patient/{userid}/note/{visitid}";
 	}
-<<<<<<< HEAD
 
 	@RequestMapping(value = "/patient/{userid}/prescriptions", method = RequestMethod.GET)
-	public String showPrescriptions(HttpServletRequest request, HttpServletResponse response,RedirectAttributes redirectAttributes) throws Exception {
+	public String showPrescriptions(HttpServletRequest request, HttpServletResponse response,
+			RedirectAttributes redirectAttributes) throws Exception {
 
 		TransactionScript transactionScript = new GetPrescriptionForPatient(request, response);
 
@@ -124,16 +124,15 @@ public class DoktorController {
 
 		return "redirect:/doktor/patient/{userid}/prescriptions";
 	}
-=======
-	
+
 	@RequestMapping(value = "/patient/{userid}/prescriptions", method = RequestMethod.GET)
 	public String showPrescriptions(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
-		TransactionScript transactionScript = new GetPrescriptionForPatient(request,response);
-		
+
+		TransactionScript transactionScript = new GetPrescriptionForPatient(request, response);
+
 		transactionScript.run();
-		
+
 		return "doktorprescriptions";
 	}
->>>>>>> 685925bbadb383141a64d47dc929d751fe6f1076
+
 }
